@@ -1,4 +1,4 @@
-package logic.Enumerations;
+package logic.user;
 
 public enum Role
 {

@@ -1,6 +1,5 @@
-package logic;
+package logic.user;
 
-import logic.Enumerations.Role;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 

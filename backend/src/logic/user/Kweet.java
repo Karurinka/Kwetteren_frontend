@@ -1,4 +1,4 @@
-package logic;
+package logic.user;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
