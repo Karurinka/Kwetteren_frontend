@@ -1,4 +1,4 @@
-package logic.login.encryption;
+package main.java.logic.login.encryption;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;

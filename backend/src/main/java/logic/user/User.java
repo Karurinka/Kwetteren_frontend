@@ -1,11 +1,16 @@
 package logic.user;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.List;
+import java.util.Objects;
 
+@Entity
 public class User
 {
   //variables
+  @Id
   private String username;
   private String password;
   private String location;
@@ -15,6 +20,7 @@ public class User
   private List<User> following;
   private List<User> followers;
   private List<Kweet> kweets;
+
 
   //general user constructor
   public User(String username, String password, String location, String website, String biography, Role role)
@@ -95,24 +101,12 @@ public class User
       this.biography = biography;
   }
 
-  //methods
-  public Boolean ChangeUsername()
+  @Override
+  public String toString()
   {
-      throw new NotImplementedException();
-  }
-
-  public Boolean ChangeBiography()
-  {
-      throw new NotImplementedException();
-  }
-
-  public Kweet GetLatest10Kweets()
-  {
-      throw new NotImplementedException();
-  }
-
-  public Boolean FollowUser(User follower, User following)
-  {
-      throw new NotImplementedException();
+    return "User{" + "username='" + username + '\'' + ", location='" + location +
+      '\'' + ", website='" + website + '\'' + ", biography='" + biography + '\'' +
+      ", role=" + role + ", following=" + following +
+      ", followers=" + followers + ", kweets=" + kweets + '}';
   }
 }

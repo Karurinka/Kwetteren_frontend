@@ -42,14 +42,4 @@ public class Kweet
     this.content = content;
   }
 
-  //methods
-  public Boolean DeleteKweet()
-  {
-    throw new NotImplementedException();
-  }
-
-  public List<Kweet> SearchKweet()
-  {
-      throw new NotImplementedException();
-  }
 }

@@ -1,4 +1,4 @@
-package logic.login.encryption;
+package main.java.logic.login.encryption;
 
 public interface IEncryptionManager
 {

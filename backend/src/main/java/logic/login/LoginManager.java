@@ -1,7 +1,5 @@
 package logic.login;
 
-import logic.user.User;
-
 public class LoginManager implements ILoginManager
 {
   @Override
@@ -9,8 +7,8 @@ public class LoginManager implements ILoginManager
   {
     if (username != null && !username.isEmpty() && password != null)
     {
-      //TODO: create session manager and data layer
-      //User user = data.login(email, password);
+      //TODO: create session manager and main.java.DAO layer
+      //User user = main.java.DAO.login(email, password);
 
       //if (user != null)
       //{

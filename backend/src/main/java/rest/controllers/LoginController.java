@@ -1,8 +1,8 @@
 package rest.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import rest.models.LoginRequestModel;
-import rest.models.LoginResponseModel;
+import main.java.rest.models.LoginRequestModel;
+import main.java.rest.models.LoginResponseModel;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +36,7 @@ public class LoginController
     //TODO: implement session id
     String userLoginLogMessage = String.format("User %s, attempted to log in", loginstream.getUsername());
     LOGGER.log(Level.INFO, userLoginLogMessage);
-    //int sessionId = logic.login(loginstream.getEmail(), loginstream.getPassword().toCharArray());
+    //int sessionId = main.java.logic.login(loginstream.getEmail(), loginstream.getPassword().toCharArray());
     int sessionId = 1;
     LoginResponseModel loginResponse;
 
@@ -48,7 +48,7 @@ public class LoginController
     else
     {
       response.setStatus(HttpServletResponse.SC_OK);
-      //TODO: get username from data layer
+      //TODO: get username from main.java.DAO layer
       //loginResponse = new LoginResponseModel(sessionId, username);
       loginResponse = new LoginResponseModel();
     }
