@@ -1,7 +1,13 @@
 package logic.login;
 
+import DAO.IUserDAO;
+
 public class LoginManager implements ILoginManager
 {
+
+
+  private IUserDAO IUserDAO;
+
   @Override
   public int login(String username, char[] password)
   {

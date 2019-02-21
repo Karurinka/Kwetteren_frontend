@@ -1,4 +1,4 @@
-package rest.models;
+package logic.models;
 
 public class LoginResponseModel
 {

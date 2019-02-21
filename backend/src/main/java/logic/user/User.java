@@ -1,24 +1,34 @@
 package logic.user;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class User
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "userdao.search", query = "select u from  User u where u.username like :usernbame order by u.username desc"),
+    @NamedQuery(name = "userdao.getFollowing", query = "SELECT u FROM User u where :id in (select f.Id from u.following f)")
+})
+public class User extends KweetModel
 {
   //variables
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String username;
   private String password;
   private String location;
   private String website;
   private String biography;
   private Role role;
+  @OneToMany
   private List<User> following;
+  @OneToMany
   private List<User> followers;
+  @OneToMany
   private List<Kweet> kweets;
 
 

@@ -1,8 +1,8 @@
-package rest.controllers;
+package endpoints.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import main.java.rest.models.LoginRequestModel;
-import main.java.rest.models.LoginResponseModel;
+import logic.models.LoginRequestModel;
+import logic.models.LoginResponseModel;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

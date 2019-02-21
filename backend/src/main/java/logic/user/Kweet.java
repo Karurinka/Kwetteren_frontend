@@ -1,45 +1,62 @@
 package logic.user;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
-import java.util.List;
 
-public class Kweet
+@Entity
+@XmlRootElement
+@NamedQueries({
+  @NamedQuery(name = "tweetdao.getPersonalTweets",
+    query = "select t from  Kweet k, User u  where u.Id = :id " +
+      "and (k.postAccount.Id in (select f.Id from u.following b) or k.postUser.Id = :id ) " +
+      "order by k.Date desc"),
+  @NamedQuery(name = "tweetdao.getPostedTweets", query = "select k from  Kweet k where k.postUser.Id = :id order by k.Date desc"),
+  @NamedQuery(name = "tweetdao.search", query = "select k from  Kweet k where k.content like :content order by k.Date desc")})
+public class Kweet extends KweetModel
 {
   //variables
-  private Date date;
   private String content;
   private Integer maxValue;
+  private User user;
+  private Date date;
 
   //constructor
-  public Kweet(Date date, String content)
+  public Kweet(String content, User user)
   {
-    this.date = date;
+    this.user = user;
+    date = new Date();
     this.content = content;
     maxValue = 140;
   }
 
   //getters
-  public Date getDate()
-  {
-    return date;
-  }
-
   public String getContent()
   {
     return content;
   }
 
-  //setters
-  public void setDate(Date date)
+  public User getUser()
   {
-    this.date = date;
+    return user;
   }
 
+  public Date getDate()
+  {
+    return date;
+  }
+
+  //setters
   public void setContent(String content)
   {
     this.content = content;
+  }
+
+  public void setUser(User user)
+  {
+    this.user = user;
   }
 
 }
