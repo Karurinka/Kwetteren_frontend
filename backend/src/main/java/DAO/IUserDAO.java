@@ -1,16 +1,17 @@
 package DAO;
 
-import logic.user.Role;
-import logic.user.User;
+import DAO.JPAImpl.IKwetterDAO;
+import logic.models.Role;
+import logic.models.User;
 
 import java.util.List;
 
-public interface IUserDAO
+public interface IUserDAO extends IKwetterDAO<User>
 {
-  void update(User user);
-  void create(User user);
-  User findById(int userId);
-  User search(String username);
-  List<User> getFollowing(int userId);
-  boolean addRole(Role role, int userId);
+  User findByUserName(String name);
+  List<User> search(String name);
+  List<User> getFollowing(int Id);
+  boolean addRole(Role role, int Id);
+  boolean removeRole(Role role, int Id);
 }
+

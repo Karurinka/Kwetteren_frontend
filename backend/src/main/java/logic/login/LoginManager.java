@@ -14,11 +14,11 @@ public class LoginManager implements ILoginManager
     if (username != null && !username.isEmpty() && password != null)
     {
       //TODO: create session manager and main.java.DAO layer
-      //User user = main.java.DAO.login(email, password);
+      //User models = main.java.DAO.login(email, password);
 
-      //if (user != null)
+      //if (models != null)
       //{
-      //  return sessionManager.getNewSessionID(user);
+      //  return sessionManager.getNewSessionID(models);
       //}
     }
 

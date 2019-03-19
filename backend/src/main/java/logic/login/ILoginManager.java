@@ -3,16 +3,16 @@ package logic.login;
 public interface ILoginManager<T>
 {
   /**
-   * Logs the user into the system
-   * @param email to identify the user
-   * @param password to check the user credentials
-   * @return Returns the session id linked to the user
+   * Logs the models into the system
+   * @param email to identify the models
+   * @param password to check the models credentials
+   * @return Returns the session id linked to the models
    */
   int login(String email, char[] password);
 
   /**
-   * Logs the user out of the system
-   * @param sessionId by which the user is identified
+   * Logs the models out of the system
+   * @param sessionId by which the models is identified
    */
   void logout(int sessionId);
 }

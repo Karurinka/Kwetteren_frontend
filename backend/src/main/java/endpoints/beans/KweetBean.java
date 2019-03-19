@@ -1,7 +1,7 @@
 package endpoints.beans;
 
-import logic.user.Kweet;
-import logic.user.User;
+import logic.models.Kweet;
+import logic.models.User;
 import services.KweetService;
 
 import javax.enterprise.context.SessionScoped;
@@ -18,15 +18,16 @@ public class KweetBean implements Serializable
   @Inject
   KweetService kweetService;
 
-  //TODO: add user service
+  //TODO: add models service
   //@Inject
   //UserService userService
 
   public String Create(User currentUser)
   {
-    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-    String newContent = params.get("createF:Content");
-    kweetService.create(newContent, currentUser.getId());
+    //TODO: create the right context
+    //Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+    //String newContent = params.get("createF:Content");
+    //kweetService.create(newContent, currentUser.getId());
     return "app/index";
   }
 

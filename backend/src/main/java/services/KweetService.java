@@ -2,11 +2,13 @@ package services;
 
 import DAO.IKweetDAO;
 import DAO.IUserDAO;
+import Event.LogEvent;
 import com.sun.jersey.spi.inject.Inject;
-import logic.user.Kweet;
-import logic.user.User;
+import logic.models.Kweet;
+import logic.models.User;
 import utility.JPA;
 
+import javax.enterprise.event.Observes;
 import java.io.Serializable;
 import java.util.List;
 public class KweetService implements Serializable
@@ -22,12 +24,12 @@ public class KweetService implements Serializable
 
   public Kweet findById(int id)
   {
-    return kweetDAO.findById(id);
+    return (Kweet) kweetDAO.findById(id);
   }
 
   public List<Kweet> getAllTweets()
   {
-    return kweetDAO.getAllKweets();
+    return kweetDAO.getAll();
   }
 
   public List<Kweet> postedTweets(int userId)
@@ -67,10 +69,10 @@ public class KweetService implements Serializable
 
   public boolean remove(int id)
   {
-    Kweet tweet = kweetDAO.findById(id);
+    Kweet kweet = (Kweet) kweetDAO.findById(id);
     try
     {
-      kweetDAO.delete(tweet);
+      kweetDAO.delete(kweet);
     } catch (Exception e)
     {
       return false;
@@ -83,7 +85,7 @@ public class KweetService implements Serializable
     boolean success = false;
     try
     {
-      Kweet kweet = kweetDAO.findById(tweetId);
+      Kweet kweet = (Kweet) kweetDAO.findById(tweetId);
       User user = userDAO.findById(userId);
       if (kweet == null || user == null) throw new Exception("Tweet or account not found");
 
@@ -105,6 +107,5 @@ public class KweetService implements Serializable
     this.userDAO = IUserDAO;
   }
 
-  //TODO: fix logging issues
-  //public void logCreateKwetter(@Observes LogEvent event) {event.printLine("Created a tweet");}
+  public void logCreateKwetter(@Observes LogEvent event) {event.printLine("Created a tweet");}
 }
