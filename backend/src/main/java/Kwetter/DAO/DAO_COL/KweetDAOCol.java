@@ -4,15 +4,19 @@ import Kwetter.DAO.IKweetDAO;
 import Kwetter.Models.Kweet;
 import Kwetter.Models.User;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.List;
 
+@Stateless
+@Default
 public class KweetDAOCol implements IKweetDAO
 {
   CopyOnWriteArrayList<Kweet> kweets = new CopyOnWriteArrayList<>();
-  UserDAOCol accountService;
+  UserDAOCol userService;
 
   int Id = 0;
 
@@ -31,19 +35,19 @@ public class KweetDAOCol implements IKweetDAO
   }
 
   @Override
-  public void delete(Kweet kweet)
+  public void delete(Kweet tweet)
   {
-    kweets.remove(kweet);
+    kweets.remove(tweet);
   }
 
   @Override
-  public void update(Kweet kweet)
+  public void update(Kweet entity)
   {
     for (int i = 0; i < kweets.size(); i++)
     {
-      if (kweets.get(i).getId() == kweet.getId())
+      if (kweets.get(i).getId() == entity.getId())
       {
-        kweets.set(i, kweet);
+        kweets.set(i, entity);
         break;
       }
     }
@@ -58,11 +62,11 @@ public class KweetDAOCol implements IKweetDAO
   @Override
   public Kweet findById(int id)
   {
-    for (Kweet t : this.kweets)
+    for (Kweet k : this.kweets)
     {
-      if (t.getId() == (int) id)
+      if (k.getId() == (int) id)
       {
-        return t;
+        return k;
       }
     }
     return null;
@@ -71,16 +75,16 @@ public class KweetDAOCol implements IKweetDAO
   @Override
   public List<Kweet> getPersonalKweets(int userId)
   {
-    User user = accountService.findById(userId);
-    List<Kweet> tweets = new ArrayList<>();
+    User user = userService.findById(userId);
+    List<Kweet> kweets = new ArrayList<>();
     for (Kweet k : this.kweets)
     {
       if (k.getPostAccount().getId() == userId || user.getFollowing().contains(k.getPostAccount()))
       {
-        tweets.add(k);
+        kweets.add(k);
       }
     }
-    return tweets;
+    return kweets;
   }
 
   @Override
@@ -100,24 +104,24 @@ public class KweetDAOCol implements IKweetDAO
   @Override
   public List<Kweet> search(String content)
   {
-    List<Kweet> tweets = new ArrayList<>();
+    List<Kweet> kweets = new ArrayList<>();
     for (Kweet k : this.kweets)
     {
       if (k.getContent().contains(content))
       {
-        tweets.add(k);
+        kweets.add(k);
       }
     }
-    return tweets;
+    return kweets;
   }
 
   public void setTweets(CopyOnWriteArrayList<Kweet> tweets)
   {
-    this.kweets = tweets;
+    this.kweets = kweets;
   }
 
-  public void setAccountService(UserDAOCol accountService)
+  public void setAccountService(UserDAOCol userService)
   {
-    this.accountService = accountService;
+    this.userService = userService;
   }
 }

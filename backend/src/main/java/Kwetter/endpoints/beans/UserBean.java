@@ -79,7 +79,7 @@ public class UserBean implements Serializable
     {
       getLoggedIn();
     }
-    return loggedIn.getFollowing().contains(toFollow) || loggedIn.getUserName() == toFollow.getUserName();
+    return loggedIn.getFollowing().contains(toFollow) || loggedIn.getUsername() == toFollow.getUsername();
   }
 
   public List<User> search(String searchQuery)

@@ -36,11 +36,16 @@ public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
   {
     return em;
   }
-  
+
+  public void setEntityManager(EntityManager em)
+  {
+    this.em = em;
+  }
+
   @Override
   public List<Kweet> getPersonalKweets(int userId)
   {
-    Query q = getEntityManager().createNamedQuery("tweetdao.getPersonalTweets");
+    Query q = getEntityManager().createNamedQuery("kweetdao.getPersonalTweets");
     q.setParameter("id", userId);
     List result = q.getResultList();
     return result;
@@ -49,7 +54,7 @@ public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
   @Override
   public List<Kweet> getPostedKweets(int userId)
   {
-    Query q = getEntityManager().createNamedQuery("tweetdao.getPostedTweets");
+    Query q = getEntityManager().createNamedQuery("kweetdao.getPostedTweets");
     q.setParameter("id", userId);
     List result = q.getResultList();
     return result;
@@ -58,14 +63,9 @@ public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
   @Override
   public List<Kweet> search(String content)
   {
-    Query q = getEntityManager().createNamedQuery("tweetdao.search");
+    Query q = getEntityManager().createNamedQuery("kweetdao.search");
     q.setParameter("content", "%" + content + "%");
     List result = q.getResultList();
     return result;
-  }
-
-  public void setEm(EntityManager em)
-  {
-    this.em = em;
   }
 }

@@ -1,6 +1,6 @@
 package Kwetter.utility;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+import javax.inject.Qualifier;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
