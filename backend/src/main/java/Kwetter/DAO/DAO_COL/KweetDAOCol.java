@@ -1,8 +1,8 @@
-package DAO.DAO_COL;
+package Kwetter.DAO.DAO_COL;
 
-import DAO.IKweetDAO;
-import Models.Kweet;
-import Models.User;
+import Kwetter.DAO.IKweetDAO;
+import Kwetter.Models.Kweet;
+import Kwetter.Models.User;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package DAO.DAO_COL;
+package Kwetter.DAO.DAO_COL;
 
 
 
-import DAO.IRoleDAO;
-import Models.Role;
+import Kwetter.DAO.IRoleDAO;
+import Kwetter.Models.Role;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;

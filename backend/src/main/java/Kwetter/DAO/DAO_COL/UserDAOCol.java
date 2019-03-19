@@ -1,9 +1,9 @@
-package DAO.DAO_COL;
+package Kwetter.DAO.DAO_COL;
 
-import DAO.DAOFacade;
-import DAO.IUserDAO;
-import Models.Role;
-import Models.User;
+import Kwetter.DAO.DAOFacade;
+import Kwetter.DAO.IUserDAO;
+import Kwetter.Models.Role;
+import Kwetter.Models.User;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -24,9 +24,9 @@ public class UserDAOCol extends DAOFacade<User> implements IUserDAO
   }
 
   @Override
-  public void create(User account) {
-    account.setId(Id);
-    users.add(account);
+  public void create(User user) {
+    user.setId(Id);
+    users.add(user);
     Id++;
 
   }

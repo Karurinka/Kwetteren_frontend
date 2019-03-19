@@ -1,8 +1,8 @@
-package endpoints.beans;
+package Kwetter.endpoints.beans;
 
-import Models.Kweet;
-import Models.User;
-import services.KweetService;
+import Kwetter.Models.Kweet;
+import Kwetter.Models.User;
+import Kwetter.services.KweetService;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;

@@ -1,10 +1,10 @@
-package endpoints.controllers;
+package Kwetter.endpoints.controllers;
 
 
-
-import Models.Kweet;
-import Models.User;
-import services.UserService;
+import Kwetter.Bool;
+import Kwetter.Models.Kweet;
+import Kwetter.Models.User;
+import Kwetter.services.UserService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -19,7 +19,8 @@ import java.util.List;
 @Stateless
 //@DeclareRoles({"regular_role", "admin_role"})
 @Path("/accounts")
-public class AccountController {
+public class UserController
+{
 
   @Inject
   UserService userService;
@@ -30,16 +31,14 @@ public class AccountController {
   @POST
   @Consumes("application/x-www-form-urlencoded")
   @Produces("application/json")
-  public Response create(@FormParam("username") String username,
-                         @FormParam("email") String email,
-                         @FormParam("bio") String bio,
-                         @FormParam("firstName") String firstName,
-                         @FormParam("lastName") String lastName,
-                         @FormParam("password") String password) {
+  public Response create(@FormParam("username") String username, @FormParam("password") String password, @FormParam("location") String location, @FormParam("website") String website, @FormParam("bio") String bio)
+  {
     User user;
-    try {
-      user = userService.create(username, email, bio, firstName, lastName, password);
-    } catch (Exception e) {
+    try
+    {
+      user = userService.create(username, password, location, website, bio);
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     if (user == null) return Response.serverError().build();
@@ -49,26 +48,32 @@ public class AccountController {
   @GET
 //    @RolesAllowed({"admin_role"})
   @Produces("application/json")
-  public Response getAllAccounts() {
+  public Response getAllAccounts()
+  {
     List<User> users;
-    try {
+    try
+    {
       users = userService.getAllAccounts();
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
-    final GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users) {
-    };
+    final GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users)
+    {};
     return Response.ok().entity(entity).build();
   }
 
   @GET
   @Path("/{userId}")
   @Produces("application/json")
-  public Response getAccountById(@PathParam("userId") int userId) {
+  public Response getAccountById(@PathParam("userId") int userId)
+  {
     User user;
-    try {
+    try
+    {
       user = userService.findByID(userId);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     if (user == null) return Response.noContent().build();
@@ -78,16 +83,19 @@ public class AccountController {
   @GET
   @Path("/tweets/{userId}")
   @Produces("application/json")
-  public Response getTweetsByAccountId(@PathParam("userId") int userId) {
+  public Response getTweetsByAccountId(@PathParam("userId") int userId)
+  {
     User account;
-    try {
+    try
+    {
       account = userService.findByID(userId);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     if (account == null || account.getTweets() == null) return Response.noContent().build();
-    final GenericEntity<List<Kweet>> entity = new GenericEntity<List<Kweet>>(account.getTweets()) {
-    };
+    final GenericEntity<List<Kweet>> entity = new GenericEntity<List<Kweet>>(account.getTweets())
+    {};
     return Response.ok().entity(entity).build();
   }
 
@@ -95,11 +103,14 @@ public class AccountController {
   @GET
   @Path("/username/{userName}")
   @Produces("application/json")
-  public Response getAccountByUsername(@PathParam("userName") String userName) {
+  public Response getAccountByUsername(@PathParam("userName") String userName)
+  {
     User user;
-    try {
+    try
+    {
       user = userService.findByUsername(userName);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     if (user == null) return Response.noContent().build();
@@ -109,16 +120,19 @@ public class AccountController {
   @GET
   @Path("/search/{name}")
   @Produces("application/json")
-  public Response search(@PathParam("name") String name) {
+  public Response search(@PathParam("name") String name)
+  {
     List<User> users;
-    try {
+    try
+    {
       users = userService.search(name);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     if (users == null) return Response.serverError().build();
-    final GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users) {
-    };
+    final GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users)
+    {};
 
     return Response.ok().entity(entity).build();
   }
@@ -126,11 +140,14 @@ public class AccountController {
   @GET
   @Path("/follow/{Id}")
   @Produces("application/json")
-  public Response followToggle(@PathParam("Id") int id, @QueryParam("loggedInUser") int loggedInUser) {
+  public Response followToggle(@PathParam("Id") int id, @QueryParam("loggedInUser") int loggedInUser)
+  {
     boolean success;
-    try {
+    try
+    {
       success = userService.followToggle(id, loggedInUser);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     return Response.ok().entity(new Bool(success)).build();
@@ -139,16 +156,19 @@ public class AccountController {
   @GET
   @Path("/followers/{Id}")//following you
   @Produces("application/json")
-  public Response followers(@PathParam("Id") int id) {
-    List<Account> accounts;
-    try {
-      accounts = service.followers(id);
-    } catch (Exception e) {
+  public Response followers(@PathParam("Id") int id)
+  {
+    List<User> users;
+    try
+    {
+      users = userService.followers(id);
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
-    if (accounts == null) return Response.serverError().build();
-    final GenericEntity<List<Account>> entity = new GenericEntity<List<Account>>(accounts) {
-    };
+    if (users == null) return Response.serverError().build();
+    final GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users)
+    {};
 
     return Response.ok().entity(entity).build();
   }
@@ -156,11 +176,14 @@ public class AccountController {
   @GET
   @Path("/role/add/{type}/{Id}")
   @Produces("application/json")
-  public Response RoleAdd(@PathParam("type") String type, @PathParam("Id") int id) {
+  public Response RoleAdd(@PathParam("type") String type, @PathParam("Id") int id)
+  {
     boolean success;
-    try {
-      success = service.addRole(type, id);
-    } catch (Exception e) {
+    try
+    {
+      success = userService.addRole(type, id);
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     return Response.ok().entity(new Bool(success)).build();
@@ -170,11 +193,14 @@ public class AccountController {
   @GET
   @Path("/role/remove/{type}/{Id}")//following you
   @Produces("application/json")
-  public Response RoleRemove(@PathParam("type") String type, @PathParam("Id") int id) {
+  public Response RoleRemove(@PathParam("type") String type, @PathParam("Id") int id)
+  {
     boolean success;
-    try {
-      success = service.removeRole(type, id);
-    } catch (Exception e) {
+    try
+    {
+      success = userService.removeRole(type, id);
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     return Response.ok().entity(new Bool(success)).build();
@@ -184,13 +210,14 @@ public class AccountController {
   @Consumes("application/x-www-form-urlencoded")
   @Produces("application/json")
   @Path("/edit/password")
-  public Response editPassword(@FormParam("currentPass") String currentPass,
-                               @FormParam("newPass") String newPass,
-                               @QueryParam("id") int id) {
+  public Response editPassword(@FormParam("currentPass") String currentPass, @FormParam("newPass") String newPass, @QueryParam("id") int id)
+  {
     boolean success;
-    try {
-      success = service.editPassword(id, currentPass, newPass);
-    } catch (Exception e) {
+    try
+    {
+      success = userService.editPassword(id, currentPass, newPass);
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     return Response.ok().entity(new Bool(success)).build();
@@ -200,23 +227,22 @@ public class AccountController {
   @Consumes("application/x-www-form-urlencoded")
   @Produces("application/json")
   @Path("/edit")
-  public Response edit(@QueryParam("id") int id,
-                       @FormParam("username") String username,
-                       @FormParam("email") String email,
-                       @FormParam("bio") String bio,
-                       @FormParam("firstName") String firstName,
-                       @FormParam("lastName") String lastName) {
+  public Response edit(@QueryParam("id") int id, @FormParam("username") String username, @FormParam("bio") String bio, @FormParam("location") String location, @FormParam("website") String website)
+  {
     boolean success;
-    try {
-      success = service.edit(id, username, email, bio, firstName, lastName);
-    } catch (Exception e) {
+    try
+    {
+      success = userService.update(id, username, bio, location, website);
+    } catch (Exception e)
+    {
       return Response.serverError().build();
     }
     return Response.ok().entity(new Bool(success)).build();
   }
 
 
-  private URI getCreatedLink(Account entity) {
+  private URI getCreatedLink(User entity)
+  {
     return uriInfo.getAbsolutePathBuilder().path(entity.getId() + "").build();
   }
 }

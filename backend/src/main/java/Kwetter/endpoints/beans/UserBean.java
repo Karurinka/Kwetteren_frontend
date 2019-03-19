@@ -1,7 +1,7 @@
-package endpoints.beans;
+package Kwetter.endpoints.beans;
 
-import Models.User;
-import services.UserService;
+import Kwetter.Models.User;
+import Kwetter.services.UserService;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
