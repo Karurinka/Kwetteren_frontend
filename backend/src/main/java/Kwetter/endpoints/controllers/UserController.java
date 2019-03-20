@@ -17,8 +17,7 @@ import java.net.URI;
 import java.util.List;
 
 @Stateless
-//@DeclareRoles({"regular_role", "admin_role"})
-@Path("/accounts")
+@Path("/users")
 public class UserController
 {
 
@@ -46,7 +45,6 @@ public class UserController
   }
 
   @GET
-//    @RolesAllowed({"admin_role"})
   @Produces("application/json")
   public Response getAllAccounts()
   {

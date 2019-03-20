@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="KwetterPU" transaction-type="JTA">
-    <jta-data-source>Twatter_JNDI</jta-data-source>
-    <class>Kwetter.Models.User</class>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="KwetterPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Kwetter.Models.Kweet</class>
+    <class>Kwetter.Models.User</class>
     <class>Kwetter.Models.Role</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
-      <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://den1.mssql7.gear.host"/>
+      <property name="javax.persistence.jdbc.password" value="Io79JmJ0?E~8"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.user" value="kwetterendata"/>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+      <property name="eclipselink.logging.logger" value="DefaultLogger"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
 </persistence>

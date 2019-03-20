@@ -61,15 +61,7 @@ public class UserBean implements Serializable
 
   public User follow(User toFollow)
   {
-//    public boolean follow(Account toFollow) {
-//        try {
     userService.followToggle(toFollow, loggedIn);
-//        } catch (Exception e) {
-//            System.out.println("Could not follow or unfollow user:" + toFollow.getUserName() + " for loggedIn user :" + loggedIn.getUserName());
-//            return false;
-//        }
-//        return true;
-//        return "/app/userprofile?user=" + toFollow.getUserName();
     return toFollow;
   }
 

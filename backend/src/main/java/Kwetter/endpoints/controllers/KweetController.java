@@ -2,9 +2,7 @@ package Kwetter.endpoints.controllers;
 
 import Kwetter.Bool;
 import Kwetter.Models.Kweet;
-import Kwetter.endpoints.beans.JMSSender;
 import Kwetter.services.KweetService;
-import Kwetter.utility.JMSMessenger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -59,17 +57,6 @@ public class KweetController
     if (kweet == null) return Response.serverError().build();
     return Response.ok().entity(kweet).build();
   }
-
-  @POST
-  @Consumes("application/x-www-form-urlencoded")
-  @Path("/jms")
-  @Produces("application/json")
-  public Response jms(@FormParam("id") int id, @FormParam("content") String content)
-  {
-    new JMSSender().send(id + "," + content);
-    return Response.ok().build();
-  }
-
 
   @GET
   @Path("/all")
@@ -141,22 +128,6 @@ public class KweetController
     }
     return Response.ok().entity(new Bool(success)).build();
   }
-
-  //@GET
-  //@Path("/heart/{Id}")
-  //@Produces("application/json")
-  //public Response heart(@PathParam("Id") int id, @QueryParam("userId") int userId)
-  //{
-  //  boolean success;
-  //  try
-  //  {
-  //    success = kweetService.hearth(id, userId);
-  //  } catch (Exception e)
-  //  {
-  //    return Response.serverError().build();
-  //  }
-  //  return Response.ok().entity(new Bool(success)).build();
-  //}
 
   @POST
   @Consumes("application/x-www-form-urlencoded")

@@ -10,112 +10,88 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+      <version>2.5.2</version>
+    </dependency>
+
+    <dependency>
       <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>9.1-901-1.jdbc4</version>
     </dependency>
+
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <version>7.0</version>
     </dependency>
+
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>2.7.14</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>eclipselink</artifactId>
       <version>2.5.2</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
       <version>2.5.2</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-client</artifactId>
       <version>3.0.2.Final</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
       <version>2.25.1</version>
     </dependency>
+
     <dependency>
       <groupId>com.googlecode.json-simple</groupId>
       <artifactId>json-simple</artifactId>
       <version>1.1.1</version>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>javax.batch</groupId>-->
-    <!--<artifactId>javax.batch-api</artifactId>-->
-    <!--<version>1.0.1</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-    <!--<artifactId>jackson-core</artifactId>-->
-    <!--<version>2.8.6</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.apache.activemq</groupId>-->
-    <!--<artifactId>activemq-all</artifactId>-->
-    <!--<version>5.14.4</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.glassfish.jersey.ext</groupId>-->
-    <!--<artifactId>jersey-declarative-linking</artifactId>-->
-    <!--<version>2.17</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>javax.el</groupId>-->
-    <!--<artifactId>javax.el-api</artifactId>-->
-    <!--<version>2.2.4</version>-->
-    <!--</dependency>-->
 
-    <!--spring hateoas-->
-    <!--<dependency>-->
-    <!--<groupId>org.springframework.hateoas</groupId>-->
-    <!--<artifactId>spring-hateoas</artifactId>-->
-    <!--<version>0.23.0.RELEASE</version>-->
-    <!--</dependency>-->
-
-    <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-    <!--<dependency>-->
-    <!--<groupId>com.mercateo</groupId>-->
-    <!--<artifactId>rest-schemagen-spring</artifactId>-->
-    <!--<version>0.1.4</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-    <!--<groupId>com.mercateo</groupId>-->
-    <!--<artifactId>common.rest.schemagen</artifactId>-->
-    <!--<version>0.9.0</version>-->
-    <!--</dependency>-->
-
+    <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>mssql-jdbc</artifactId>
+      <version>6.4.0.jre8</version>
+    </dependency>
 
     <dependency>
       <groupId>org.glassfish.jersey.ext</groupId>
       <artifactId>jersey-declarative-linking</artifactId>
       <version>2.25.1</version>
     </dependency>
+
     <dependency>
       <groupId>javax.el</groupId>
       <artifactId>javax.el-api</artifactId>
       <version>2.2.4</version>
     </dependency>
+
     <dependency>
       <groupId>org.glassfish.web</groupId>
       <artifactId>javax.el</artifactId>
@@ -129,18 +105,22 @@
       <scope>compile</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+      <version>2.7.4</version>
+      <scope>compile</scope>
+    </dependency>
 
-
-    <!--<dependency>-->
-    <!--<groupId>org.glassfish.web</groupId>-->
-    <!--<artifactId>javax-el</artifactId>-->
-    <!--&lt;!&ndash;<version>2.2.4</version>&ndash;&gt;-->
-    <!--<version>RELEASE</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+      <version>2.7.4</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
-    <!--<defaultGoal>compile test-compile war:war</defaultGoal>-->
-    <finalName>tweeter</finalName>
+    <finalName>Kwetter</finalName>
     <plugins>
       <plugin>
         <version>3.5.1</version>
