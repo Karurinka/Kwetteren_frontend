@@ -18,15 +18,10 @@ public class KweetBean implements Serializable
   KweetService kweetService;
 
   //TODO: add models service
-  //@Inject
-  //UserService userService
 
   public String Create(User currentUser)
   {
     //TODO: create the right context
-    //Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-    //String newContent = params.get("createF:Content");
-    //kweetService.create(newContent, currentUser.getId());
     return "app/index";
   }
 

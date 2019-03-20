@@ -5,6 +5,7 @@ import Kwetter.endpoints.controllers.KweetController;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.net.URI;
@@ -15,13 +16,12 @@ import org.glassfish.jersey.linking.InjectLink;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "kweetdao.getPersonalKweets", query = "select k from  Kweet k, User u  where u.Id = :id " + "and (k.postAccount.Id in (select f.Id from u.following b) or k.postAccount.Id = :id ) " + "order by k.date desc"),
+    @NamedQuery(name = "kweetdao.getPersonalKweets", query = "select k from  Kweet k, User u  where u.Id = :id " + "and (k.postAccount.Id in (select b.Id from u.following b) or k.postAccount.Id = :id ) " + "order by k.date desc"),
     @NamedQuery(name = "kweetdao.getPostedKweets", query = "select k from  Kweet k where k.postAccount.Id = :id order by k.date desc"),
     @NamedQuery(name = "kweetdao.search", query = "select k from  Kweet k where k.content like :content order by k.date desc")})
 
-public class Kweet extends KweetModel
+public class Kweet extends KweetModel implements Serializable
 {
-
   @InjectLink(resource = KweetController.class)
   URI link;
 
@@ -82,50 +82,6 @@ public class Kweet extends KweetModel
   }
 
   public void setDate(Date date) { this.date = date;}
-
-  public List<User> getHearted()
-  {
-    if (hearted == null)
-    {
-      return new ArrayList<>();
-    }
-    return hearted;
-  }
-
-  public void setHearted(List<User> hearted)
-  {
-    this.hearted = hearted;
-  }
-
-  public boolean addHearted(User user)
-  {
-    if (hearted == null)
-    {
-      hearted = new ArrayList<>();
-    }
-    if (this.hearted.contains(user))
-    {
-      return false;
-    }
-    this.hearted.add(user);
-    return true;
-  }
-
-  public boolean removeHearted(User user)
-  {
-    if (hearted == null)
-    {
-      hearted = new ArrayList<>();
-    }
-    try
-    {
-      this.hearted.remove(user);
-    } catch (Exception e)
-    {
-      return false;
-    }
-    return true;
-  }
 
   public List<User> getMentions()
   {
