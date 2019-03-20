@@ -23,7 +23,7 @@ public class User extends KweetModel
   private String biography;
   private Role role;
 
-  @ManyToMany(mappedBy = "accounts")
+  @ManyToMany(mappedBy = "users")
   @JsonManagedReference
   private List<Role> groups;
 

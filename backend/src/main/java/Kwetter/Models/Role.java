@@ -15,7 +15,7 @@ public class Role implements Serializable {
   private String groupName;
 
   @ManyToMany
-  @JoinTable(name = "account_type",
+  @JoinTable(name = "user_role",
     joinColumns = @JoinColumn(name = "groupName", referencedColumnName = "groupName"),
     inverseJoinColumns = @JoinColumn(name = "userName", referencedColumnName = "userName"))
   @JsonBackReference

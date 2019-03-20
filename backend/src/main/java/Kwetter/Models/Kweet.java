@@ -15,9 +15,9 @@ import org.glassfish.jersey.linking.InjectLink;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "kweetdao.getPersonalKweets", query = "select t from  Kweet k, User u  where u.Id = :id " + "and (k.postAccount.Id in (select f.Id from u.following b) or k.postUser.Id = :id ) " + "order by k.Date desc"),
-    @NamedQuery(name = "kweetdao.getPostedKweets", query = "select k from  Kweet k where k.postUser.Id = :id order by k.Date desc"),
-    @NamedQuery(name = "tweetdao.search", query = "select k from  Kweet k where k.content like :content order by k.Date desc")})
+    @NamedQuery(name = "kweetdao.getPersonalKweets", query = "select k from  Kweet k, User u  where u.Id = :id " + "and (k.postAccount.Id in (select f.Id from u.following b) or k.postAccount.Id = :id ) " + "order by k.date desc"),
+    @NamedQuery(name = "kweetdao.getPostedKweets", query = "select k from  Kweet k where k.postAccount.Id = :id order by k.date desc"),
+    @NamedQuery(name = "kweetdao.search", query = "select k from  Kweet k where k.content like :content order by k.date desc")})
 
 public class Kweet extends KweetModel
 {
