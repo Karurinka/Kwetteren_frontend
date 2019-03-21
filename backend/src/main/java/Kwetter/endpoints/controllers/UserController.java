@@ -172,14 +172,14 @@ public class UserController
   }
 
   @GET
-  @Path("/role/add/{type}/{Id}")
+  @Path("/role/add/{role}/{Id}")
   @Produces("application/json")
-  public Response RoleAdd(@PathParam("type") String type, @PathParam("Id") int id)
+  public Response RoleAdd(@PathParam("role") String role, @PathParam("Id") int id)
   {
     boolean success;
     try
     {
-      success = userService.addRole(type, id);
+      success = userService.addRole(role, id);
     } catch (Exception e)
     {
       return Response.serverError().build();
@@ -189,14 +189,14 @@ public class UserController
   }
 
   @GET
-  @Path("/role/remove/{type}/{Id}")//following you
+  @Path("/role/remove/{role}/{Id}")
   @Produces("application/json")
-  public Response RoleRemove(@PathParam("type") String type, @PathParam("Id") int id)
+  public Response RoleRemove(@PathParam("role") String role, @PathParam("Id") int id)
   {
     boolean success;
     try
     {
-      success = userService.removeRole(type, id);
+      success = userService.removeRole(role, id);
     } catch (Exception e)
     {
       return Response.serverError().build();
