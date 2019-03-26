@@ -1,14 +1,15 @@
 package Kwetter.endpoints.controllers;
 
-
 import Kwetter.Bool;
 import Kwetter.Models.Kweet;
 import Kwetter.Models.User;
 import Kwetter.services.UserService;
+import com.google.gson.Gson;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
@@ -28,24 +29,24 @@ public class UserController
   UriInfo uriInfo;
 
   @POST
-  @Consumes("application/x-www-form-urlencoded")
-  @Produces("application/json")
-  public Response create(@FormParam("username") String username, @FormParam("password") String password, @FormParam("location") String location, @FormParam("website") String website, @FormParam("bio") String bio)
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response create(String userJson)
   {
-    User user;
     try
     {
-      user = userService.create(username, password, location, website, bio);
+      Gson gson = new Gson();
+      User user = gson.fromJson(userJson, User.class);
+      if (user == null) return Response.serverError().build();
+      return Response.created(getCreatedLink(user)).entity(user).build();
     } catch (Exception e)
     {
       return Response.serverError().build();
     }
-    if (user == null) return Response.serverError().build();
-    return Response.created(getCreatedLink(user)).entity(user).build();
   }
 
   @GET
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response getAllAccounts()
   {
     List<User> users;
@@ -56,14 +57,12 @@ public class UserController
     {
       return Response.serverError().build();
     }
-    final GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users)
-    {};
-    return Response.ok().entity(entity).build();
+    return Response.ok().entity(users).build();
   }
 
   @GET
   @Path("/{userId}")
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response getAccountById(@PathParam("userId") int userId)
   {
     User user;
@@ -80,7 +79,7 @@ public class UserController
 
   @GET
   @Path("/tweets/{userId}")
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response getTweetsByAccountId(@PathParam("userId") int userId)
   {
     User account;
@@ -100,7 +99,7 @@ public class UserController
 
   @GET
   @Path("/username/{userName}")
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response getAccountByUsername(@PathParam("userName") String userName)
   {
     User user;
@@ -115,24 +114,14 @@ public class UserController
     return Response.ok().entity(user).build();
   }
 
-  @GET
-  @Path("/search/{name}")
-  @Produces("application/json")
-  public Response search(@PathParam("name") String name)
+  @POST
+  @Path("/search")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public String search(String name)
   {
-    List<User> users;
-    try
-    {
-      users = userService.search(name);
-    } catch (Exception e)
-    {
-      return Response.serverError().build();
-    }
-    if (users == null) return Response.serverError().build();
-    final GenericEntity<List<User>> entity = new GenericEntity<List<User>>(users)
-    {};
-
-    return Response.ok().entity(entity).build();
+    Gson gson = new Gson();
+    return gson.toJson(userService.search(name));
   }
 
   @GET
@@ -153,7 +142,7 @@ public class UserController
 
   @GET
   @Path("/followers/{Id}")//following you
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response followers(@PathParam("Id") int id)
   {
     List<User> users;
@@ -173,7 +162,7 @@ public class UserController
 
   @GET
   @Path("/role/add/{role}/{Id}")
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response RoleAdd(@PathParam("role") String role, @PathParam("Id") int id)
   {
     boolean success;
@@ -190,7 +179,7 @@ public class UserController
 
   @GET
   @Path("/role/remove/{role}/{Id}")
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   public Response RoleRemove(@PathParam("role") String role, @PathParam("Id") int id)
   {
     boolean success;
@@ -206,7 +195,7 @@ public class UserController
 
   @POST
   @Consumes("application/x-www-form-urlencoded")
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/edit/password")
   public Response editPassword(@FormParam("currentPass") String currentPass, @FormParam("newPass") String newPass, @QueryParam("id") int id)
   {
@@ -223,7 +212,7 @@ public class UserController
 
   @POST
   @Consumes("application/x-www-form-urlencoded")
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/edit")
   public Response edit(@QueryParam("id") int id, @FormParam("username") String username, @FormParam("bio") String bio, @FormParam("location") String location, @FormParam("website") String website)
   {

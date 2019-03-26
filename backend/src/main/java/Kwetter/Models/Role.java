@@ -5,12 +5,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @XmlRootElement
-public class Role implements Serializable {
+public class Role {
   @Id
   private String groupName;
 

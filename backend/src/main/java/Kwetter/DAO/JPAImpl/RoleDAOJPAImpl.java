@@ -2,7 +2,7 @@ package Kwetter.DAO.JPAImpl;
 
 import Kwetter.DAO.IRoleDAO;
 import Kwetter.Models.Role;
-import Kwetter.utility.JPA;
+import Kwetter.utils.JPA;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

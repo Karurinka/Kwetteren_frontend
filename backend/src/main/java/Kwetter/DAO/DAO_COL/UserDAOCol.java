@@ -125,6 +125,7 @@ public class UserDAOCol extends DAOFacade<User> implements IUserDAO
   public void setAccounts(CopyOnWriteArrayList<User> accounts) {
     this.users = accounts;
   }
+
   public void setId(int id){Id = id;}
 }
 

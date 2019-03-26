@@ -3,9 +3,10 @@ package Kwetter.DAO.JPAImpl;
 import Kwetter.DAO.DAOFacade;
 import Kwetter.DAO.IKweetDAO;
 import Kwetter.Models.Kweet;
-import Kwetter.utility.JPA;
+import Kwetter.utils.JPA;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;

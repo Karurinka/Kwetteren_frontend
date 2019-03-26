@@ -4,7 +4,7 @@ import Kwetter.DAO.DAOFacade;
 import Kwetter.DAO.IUserDAO;
 import Kwetter.Models.Role;
 import Kwetter.Models.User;
-import Kwetter.utility.JPA;
+import Kwetter.utils.JPA;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +16,7 @@ import java.util.List;
 @JPA
 public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO {
 
-  @PersistenceContext
+  @PersistenceContext(unitName = "KwetterPU")
   EntityManager em;
 
   public UserDAOJPAImpl() {
@@ -28,7 +28,7 @@ public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO {
     User user;
     try {
       Query q = em.createNamedQuery("userdao.findByUserName");
-      q.setParameter("userName", username);
+      q.setParameter("username", username);
       user = (User) q.getSingleResult();
     } catch (Exception e) {
       return null;

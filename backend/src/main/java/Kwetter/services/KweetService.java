@@ -5,12 +5,13 @@ import Kwetter.DAO.IUserDAO;
 import Kwetter.Event.LogEvent;
 import Kwetter.Models.Kweet;
 import Kwetter.Models.User;
-import Kwetter.utility.JPA;
+import Kwetter.utils.JPA;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
+
 public class KweetService implements Serializable
 {
   @Inject

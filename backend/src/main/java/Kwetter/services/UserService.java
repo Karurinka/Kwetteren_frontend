@@ -4,23 +4,25 @@ import Kwetter.DAO.IRoleDAO;
 import Kwetter.DAO.IUserDAO;
 import Kwetter.Models.Role;
 import Kwetter.Models.User;
-import Kwetter.utility.JPA;
+import Kwetter.utils.JPA;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+@Stateless
 public class UserService implements Serializable
 {
   @Inject
   @JPA
-  Kwetter.DAO.IRoleDAO roleDAO;
+  IRoleDAO roleDAO;
 
   @Inject
   @JPA
-  Kwetter.DAO.IUserDAO userDAO;
+  IUserDAO userDAO;
 
   public User create(String username, String password, String location, String website, String bio)
   {
@@ -32,7 +34,8 @@ public class UserService implements Serializable
 
   public boolean update(int id, String username, String bio, String location, String website)
   {
-    try {
+    try
+    {
       User user = userDAO.findById(id);
       user.setUsername(username);
       user.setBiography(bio);
@@ -40,40 +43,49 @@ public class UserService implements Serializable
       user.setWebsite(website);
       userDAO.update(user);
       return true;
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return false;
     }
   }
 
-  public boolean remove(int id) {
-    try {
+  public boolean remove(int id)
+  {
+    try
+    {
       User account = userDAO.findById(id);
       userDAO.delete(account);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       System.out.println(e);
       return false;
     }
     return true;
   }
 
-  public void setAccountDAO(IUserDAO accountDAO) {
+  public void setAccountDAO(IUserDAO accountDAO)
+  {
     this.userDAO = accountDAO;
   }
 
-  public void setTypeDAO(IRoleDAO typeDAO) {
+  public void setTypeDAO(IRoleDAO typeDAO)
+  {
     this.roleDAO = typeDAO;
   }
 
-  public List<User> getAllAccounts() {
+  public List<User> getAllAccounts()
+  {
     return userDAO.getAll();
   }
 
-  public User findByID(int userId) {
+  public User findByID(int userId)
+  {
     User user = userDAO.findById(userId);
     return user;
   }
 
-  public User findByUsername(String userName) {
+  public User findByUsername(String userName)
+  {
     User user = userDAO.findByUserName(userName);
     return user;
   }
@@ -84,33 +96,43 @@ public class UserService implements Serializable
     return users;
   }
 
-  public boolean followToggle(int toFollowId, int loggedInId) {
+  public boolean followToggle(int toFollowId, int loggedInId)
+  {
     User toFollow = userDAO.findById(toFollowId);
     User loggedIn = userDAO.findById(loggedInId);
-    return followToggle(toFollow,loggedIn);
+    return followToggle(toFollow, loggedIn);
   }
 
-  public boolean followToggle(User tofollow, User loggedIn) {
-    try {
-      if (loggedIn.getFollowing().contains(tofollow)){
+  public boolean followToggle(User tofollow, User loggedIn)
+  {
+    try
+    {
+      if (loggedIn.getFollowing().contains(tofollow))
+      {
         loggedIn.removeFollowing(tofollow);
-      }else {
+      }
+      else
+      {
         loggedIn.addFollowing(tofollow);
       }
       userDAO.update(loggedIn);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return false;
     }
     return true;
   }
 
-  public boolean follow(int toFollowId, int loggedInId) {
-    try {
+  public boolean follow(int toFollowId, int loggedInId)
+  {
+    try
+    {
       User toFollow = userDAO.findById(toFollowId);
       User loggedIn = userDAO.findById(loggedInId);
       loggedIn.addFollowing(toFollow);
       userDAO.update(loggedIn);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return false;
     }
     return true;
@@ -121,17 +143,21 @@ public class UserService implements Serializable
     return userDAO.getFollowing(userId);
   }
 
-  public List<User> followers(int id) {
+  public List<User> followers(int id)
+  {
     return userDAO.getFollowing(id);
   }
 
-  public boolean unFollow(int toUnfollowId, int loggedInId) {
-    try {
+  public boolean unFollow(int toUnfollowId, int loggedInId)
+  {
+    try
+    {
       User toUnfollow = userDAO.findById(toUnfollowId);
       User loggedIn = userDAO.findById(loggedInId);
       loggedIn.removeFollowing(toUnfollow);
       userDAO.update(loggedIn);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return false;
     }
     return true;
@@ -139,54 +165,67 @@ public class UserService implements Serializable
 
   public boolean addRole(String role, int id)
   {
-    try {
+    try
+    {
       Role type = roleDAO.findOrCreate(role);
       userDAO.addRole(type, id);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       System.out.println(e);
       return false;
     }
     return true;
   }
 
-  public boolean removeRole(String role, int id) {
-    try {
+  public boolean removeRole(String role, int id)
+  {
+    try
+    {
       Role type = roleDAO.findOrCreate(role);
       userDAO.removeRole(type, id);
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       System.out.println(e);
       return false;
     }
     return true;
   }
 
-  public boolean editPassword(int id, String currentPass, String newPass) {
+  public boolean editPassword(int id, String currentPass, String newPass)
+  {
     User user;
-    try {
+    try
+    {
       user = findByID(id);
-      if (user.getPassword() != hashPassword(currentPass)) {
+      if (user.getPassword() != hashPassword(currentPass))
+      {
         return false;
       }
       user.setPassword(hashPassword(newPass));
       userDAO.update(user);
       return true;
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return false;
     }
   }
 
-  public String hashPassword(String password) {
+  public String hashPassword(String password)
+  {
     MessageDigest md = null;
-    try {
+    try
+    {
       md = MessageDigest.getInstance("SHA-256");
-    } catch (NoSuchAlgorithmException e) {
+    } catch (NoSuchAlgorithmException e)
+    {
       e.printStackTrace();
     }
     md.update(password.getBytes());
 
     byte byteData[] = md.digest();
     StringBuffer sb = new StringBuffer();
-    for (int i = 0; i < byteData.length; i++) {
+    for (int i = 0; i < byteData.length; i++)
+    {
       sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
     }
     return sb.toString();
