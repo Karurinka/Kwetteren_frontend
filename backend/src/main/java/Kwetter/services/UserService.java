@@ -4,16 +4,20 @@ import Kwetter.DAO.IRoleDAO;
 import Kwetter.DAO.IUserDAO;
 import Kwetter.Models.Role;
 import Kwetter.Models.User;
-import Kwetter.utils.JPA;
+import Kwetter.utility.JPA;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-@Stateless
+@RequestScoped
+@Named
+@Default
 public class UserService implements Serializable
 {
   @Inject

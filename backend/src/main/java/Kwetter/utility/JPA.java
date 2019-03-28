@@ -1,4 +1,4 @@
-package Kwetter.utils;
+package Kwetter.utility;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.Retention;

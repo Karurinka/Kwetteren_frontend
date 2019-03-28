@@ -3,7 +3,7 @@ package Kwetter.DAO.JPAImpl;
 import Kwetter.DAO.DAOFacade;
 import Kwetter.DAO.IKweetDAO;
 import Kwetter.Models.Kweet;
-import Kwetter.utils.JPA;
+import Kwetter.utility.JPA;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

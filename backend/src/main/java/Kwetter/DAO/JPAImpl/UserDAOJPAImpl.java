@@ -4,7 +4,7 @@ import Kwetter.DAO.DAOFacade;
 import Kwetter.DAO.IUserDAO;
 import Kwetter.Models.Role;
 import Kwetter.Models.User;
-import Kwetter.utils.JPA;
+import Kwetter.utility.JPA;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

@@ -5,7 +5,7 @@ import Kwetter.DAO.IUserDAO;
 import Kwetter.Event.LogEvent;
 import Kwetter.Models.Kweet;
 import Kwetter.Models.User;
-import Kwetter.utils.JPA;
+import Kwetter.utility.JPA;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @RequestScoped
-@Named("KweetService")
+@Named
 @Default
 public class KweetService implements Serializable
 {
