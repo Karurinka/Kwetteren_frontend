@@ -6,13 +6,16 @@ import Kwetter.Models.Role;
 import Kwetter.Models.User;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Stateless
+@Named
+@ApplicationScoped
 @Default
 public class UserDAOCol extends DAOFacade<User> implements IUserDAO
 {

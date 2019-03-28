@@ -18,7 +18,7 @@ export class KweetService extends BaseService
 
 
   //@POST
-  // TODO: kweet JSON
+  // TODO: kweet JSON as parameter
   create()
   {
     return this.httpClient.post(

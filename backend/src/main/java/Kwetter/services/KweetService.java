@@ -7,11 +7,17 @@ import Kwetter.Models.Kweet;
 import Kwetter.Models.User;
 import Kwetter.utils.JPA;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+@RequestScoped
+@Named("KweetService")
+@Default
 public class KweetService implements Serializable
 {
   @Inject
@@ -38,16 +44,13 @@ public class KweetService implements Serializable
     return kweetDAO.getPostedKweets(userId);
   }
 
-  public Kweet create(String content, int userId)
+  public void create(String content, int userId)
   {
-
     User user = userDAO.findById(userId);
     Kweet kweet = new Kweet(content, user);
 
     kweetDAO.create(kweet);
     userDAO.update(user);
-
-    return kweet;
   }
 
   public Kweet edit(int id, String content)

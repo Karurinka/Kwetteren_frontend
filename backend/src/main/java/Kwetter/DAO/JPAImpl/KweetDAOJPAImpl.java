@@ -5,15 +5,16 @@ import Kwetter.DAO.IKweetDAO;
 import Kwetter.Models.Kweet;
 import Kwetter.utils.JPA;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 
-@Stateless
+@Named
+@ApplicationScoped
 @JPA
 public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
 {

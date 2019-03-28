@@ -17,7 +17,6 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 
-@Stateless
 @Path("/users")
 public class UserController
 {
@@ -37,6 +36,8 @@ public class UserController
     {
       Gson gson = new Gson();
       User user = gson.fromJson(userJson, User.class);
+      userService.create(user.getUsername(), user.getPassword(), user.getLocation(),
+        user.getWebsite(), user.getBiography());
       if (user == null) return Response.serverError().build();
       return Response.created(getCreatedLink(user)).entity(user).build();
     } catch (Exception e)

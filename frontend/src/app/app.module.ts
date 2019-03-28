@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { KweetCreateComponent } from './components/kweet-create/kweet-create.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -15,7 +17,10 @@ import { KweetCreateComponent } from './components/kweet-create/kweet-create.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

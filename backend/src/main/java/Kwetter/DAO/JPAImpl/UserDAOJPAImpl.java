@@ -6,13 +6,15 @@ import Kwetter.Models.Role;
 import Kwetter.Models.User;
 import Kwetter.utils.JPA;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.*;
 import java.util.List;
 
-@Stateless
+@Named
+@ApplicationScoped
 @JPA
 public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO {
 

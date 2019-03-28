@@ -4,14 +4,16 @@ import Kwetter.DAO.IKweetDAO;
 import Kwetter.Models.Kweet;
 import Kwetter.Models.User;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
 
-@Stateless
+@Named
+@ApplicationScoped
 @Default
 public class KweetDAOCol implements IKweetDAO
 {

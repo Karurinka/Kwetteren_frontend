@@ -4,11 +4,13 @@ import Kwetter.DAO.IRoleDAO;
 import Kwetter.Models.Role;
 import Kwetter.utils.JPA;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Stateless
+@Named
+@ApplicationScoped
 @JPA
 public class RoleDAOJPAImpl implements IRoleDAO {
   @PersistenceContext
