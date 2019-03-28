@@ -1,9 +1,9 @@
-package Utility;
+package Kwetter.utility;
+
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import Kwetter.utility.ISessionFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.StatelessSession;

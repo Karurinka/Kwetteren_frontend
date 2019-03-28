@@ -1,5 +1,8 @@
 package Kwetter.DAO;
 
+import Kwetter.utility.HibernateSessionFactory;
+import org.hibernate.Session;
+
 import javax.persistence.EntityManager;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
@@ -14,21 +17,32 @@ public abstract class DAOFacade<T>
     this.entityClass = entityClass;
   }
 
-  protected abstract EntityManager getEntityManager();
+  protected abstract HibernateSessionFactory getHibernateSessionFactory();
 
   public void create(T entity)
   {
-    getEntityManager().persist(entity);
+    Session session = getHibernateSessionFactory().getCurrentSession();
+    session.getTransaction().begin();
+    session.save(entity);
+    session.getTransaction().commit();
   }
 
   public void update(T entity)
   {
-    getEntityManager().merge(entity);
+    //getEntityManager().merge(entity);
+    Session session = getHibernateSessionFactory().getCurrentSession();
+    session.getTransaction().begin();
+    session.update(entity);
+    session.getTransaction().commit();
   }
 
   public void delete(T entity)
   {
-    getEntityManager().remove(getEntityManager().merge(entity));
+    //getEntityManager().remove(getEntityManager().merge(entity));
+    Session session = getHibernateSessionFactory().getCurrentSession();
+    session.getTransaction().begin();
+    session.delete(entity);
+    session.getTransaction().commit();
   }
 
   public T findById(int id)
@@ -36,7 +50,8 @@ public abstract class DAOFacade<T>
     T entity = null;
     try
     {
-      entity = getEntityManager().find(entityClass, id);
+      //entity = getEntityManager().find(entityClass, id);
+      entity = getHibernateSessionFactory().getCurrentSession().find(entityClass, id);
     } catch (NotFoundException e)
     {
       System.out.println("Could not find Entity of type " + entityClass.getName() + " with ID :" + id);
@@ -46,6 +61,7 @@ public abstract class DAOFacade<T>
 
   public List<T> getAll()
   {
-    return getEntityManager().createQuery("Select t from " + entityClass.getSimpleName() + " t").getResultList();
+    //return getEntityManager().createQuery("Select t from " + entityClass.getSimpleName() + " t").getResultList();
+    return getHibernateSessionFactory().getCurrentSession().createQuery("Select t from " + entityClass.getSimpleName() + " t").getResultList();
   }
 }

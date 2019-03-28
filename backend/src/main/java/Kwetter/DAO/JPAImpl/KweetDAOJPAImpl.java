@@ -3,12 +3,12 @@ package Kwetter.DAO.JPAImpl;
 import Kwetter.DAO.DAOFacade;
 import Kwetter.DAO.IKweetDAO;
 import Kwetter.Models.Kweet;
+import Kwetter.utility.HibernateSessionFactory;
 import Kwetter.utility.JPA;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +18,8 @@ import java.util.List;
 @JPA
 public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
 {
-  @PersistenceContext
-  EntityManager em;
+  @Inject
+  private HibernateSessionFactory mySessionFactory;
 
   public KweetDAOJPAImpl()
   {
@@ -34,20 +34,20 @@ public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
   }
 
   @Override
-  public EntityManager getEntityManager()
+  public HibernateSessionFactory getHibernateSessionFactory()
   {
-    return em;
+    return mySessionFactory;
   }
 
-  public void setEntityManager(EntityManager em)
+  public void setHibernateSessionFactory(HibernateSessionFactory em)
   {
-    this.em = em;
+    this.mySessionFactory = mySessionFactory;
   }
 
   @Override
   public List<Kweet> getPersonalKweets(int userId)
   {
-    Query q = getEntityManager().createNamedQuery("kweetdao.getPersonalTweets");
+    Query q = getHibernateSessionFactory().getCurrentSession().createNamedQuery("kweetdao.getPersonalKweets");
     q.setParameter("id", userId);
     List result = q.getResultList();
     return result;
@@ -56,7 +56,7 @@ public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
   @Override
   public List<Kweet> getPostedKweets(int userId)
   {
-    Query q = getEntityManager().createNamedQuery("kweetdao.getPostedTweets");
+    Query q = getHibernateSessionFactory().getCurrentSession().createNamedQuery("kweetdao.getPostedKweets");
     q.setParameter("id", userId);
     List result = q.getResultList();
     return result;
@@ -65,7 +65,7 @@ public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
   @Override
   public List<Kweet> search(String content)
   {
-    Query q = getEntityManager().createNamedQuery("kweetdao.search");
+    Query q = getHibernateSessionFactory().getCurrentSession().createNamedQuery("kweetdao.search");
     q.setParameter("content", "%" + content + "%");
     List result = q.getResultList();
     return result;

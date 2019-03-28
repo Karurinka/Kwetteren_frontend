@@ -4,6 +4,7 @@ import Kwetter.DAO.DAOFacade;
 import Kwetter.DAO.IUserDAO;
 import Kwetter.Models.Role;
 import Kwetter.Models.User;
+import Kwetter.utility.HibernateSessionFactory;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
@@ -21,8 +22,10 @@ public class UserDAOCol extends DAOFacade<User> implements IUserDAO
 {
   CopyOnWriteArrayList<User> users = new CopyOnWriteArrayList<>();
   int Id = 0;
+
   @Override
-  public EntityManager getEntityManager() {
+  public HibernateSessionFactory getHibernateSessionFactory()
+  {
     return null;
   }
 

@@ -3,11 +3,11 @@ package Kwetter.DAO.DAO_COL;
 import Kwetter.DAO.IKweetDAO;
 import Kwetter.Models.Kweet;
 import Kwetter.Models.User;
+import Kwetter.utility.HibernateSessionFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class KweetDAOCol implements IKweetDAO
   int Id = 0;
 
   @Override
-  public EntityManager getEntityManager()
+  public HibernateSessionFactory getHibernateSessionFactory()
   {
     return null;
   }

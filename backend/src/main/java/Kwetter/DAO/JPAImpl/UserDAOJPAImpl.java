@@ -4,35 +4,40 @@ import Kwetter.DAO.DAOFacade;
 import Kwetter.DAO.IUserDAO;
 import Kwetter.Models.Role;
 import Kwetter.Models.User;
+import Kwetter.utility.HibernateSessionFactory;
 import Kwetter.utility.JPA;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.*;
 import java.util.List;
 
 @Named
 @ApplicationScoped
 @JPA
-public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO {
+public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO
+{
 
-  @PersistenceContext(unitName = "KwetterPU")
-  EntityManager em;
+  @Inject
+  private HibernateSessionFactory mySessionFactory;
 
-  public UserDAOJPAImpl() {
+  public UserDAOJPAImpl()
+  {
     super(User.class);
   }
 
   @Override
-  public User findByUserName(String username) {
+  public User findByUserName(String username)
+  {
     User user;
-    try {
-      Query q = em.createNamedQuery("userdao.findByUserName");
+    try
+    {
+      Query q = getHibernateSessionFactory().getCurrentSession().createNamedQuery("userdao.findByUserName");
       q.setParameter("username", username);
       user = (User) q.getSingleResult();
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       return null;
     }
     return user;
@@ -40,30 +45,35 @@ public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO {
   }
 
   @Override
-  public List<User> search(String name) {
+  public List<User> search(String name)
+  {
     name = name.replace(" ", "%");
     name = "%" + name + "%";
-    Query q = em.createNamedQuery("userdao.search");
+    Query q = getHibernateSessionFactory().getCurrentSession().createNamedQuery("userdao.search");
     q.setParameter("name", name);
     List<User> userList = q.getResultList();
     return userList;
   }
 
   @Override
-  public List<User> getFollowing(int Id) {
-    Query q = em.createNamedQuery("userdao.getFollowing");
+  public List<User> getFollowing(int Id)
+  {
+    Query q = getHibernateSessionFactory().getCurrentSession().createNamedQuery("userdao.getFollowing");
     q.setParameter("id", Id);
     List<User> userList = q.getResultList();
     return userList;
   }
 
   @Override
-  public boolean addRole(Role role, int id) {
-    try {
+  public boolean addRole(Role role, int id)
+  {
+    try
+    {
       User user = findById(id);
       user.addGroup(role);
-      em.persist(user);
-    } catch (Exception e) {
+      getHibernateSessionFactory().getCurrentSession().persist(user);
+    } catch (Exception e)
+    {
       System.out.println(e);
       return false;
     }
@@ -71,12 +81,15 @@ public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO {
   }
 
   @Override
-  public boolean removeRole(Role role, int id) {
-    try {
+  public boolean removeRole(Role role, int id)
+  {
+    try
+    {
       User user = findById(id);
       user.removeGroup(role);
-      em.persist(user);
-    } catch (Exception e) {
+      getHibernateSessionFactory().getCurrentSession().persist(user);
+    } catch (Exception e)
+    {
       System.out.println(e);
       return false;
     }
@@ -84,11 +97,14 @@ public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO {
   }
 
   @Override
-  public EntityManager getEntityManager() {
-    return em;
+  public HibernateSessionFactory getHibernateSessionFactory()
+  {
+    return mySessionFactory;
   }
 
-  public void setEm(EntityManager em) {
-    this.em = em;
+
+  public void setHibernateSessionFactory(HibernateSessionFactory em)
+  {
+    this.mySessionFactory = mySessionFactory;
   }
 }

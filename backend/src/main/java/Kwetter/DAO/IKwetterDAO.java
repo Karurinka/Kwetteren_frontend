@@ -1,11 +1,12 @@
 package Kwetter.DAO;
 
-import javax.persistence.EntityManager;
+import Kwetter.utility.HibernateSessionFactory;
+
 import java.util.List;
 
 public interface IKwetterDAO<T>
 {
-  EntityManager getEntityManager();
+  HibernateSessionFactory getHibernateSessionFactory();
 
   List<T> getAll();
 

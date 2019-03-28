@@ -18,8 +18,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UserDAOJPAImplTest {
-  EntityManagerFactory emf = Persistence.createEntityManagerFactory("KwetterTestPU");
-  private EntityManager em;
   private EntityTransaction tx;
   private UserDAOJPAImpl userDAO;
   private RoleDAOJPAImpl roleDAO;
@@ -31,20 +29,6 @@ public class UserDAOJPAImplTest {
 
   @Before
   public void setUp() {
-    try {
-      new DatabaseCleaner(emf.createEntityManager()).clean();
-    } catch (SQLException ex) {
-      Logger.getLogger(UserDAOJPAImplTest.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    em = emf.createEntityManager();
-    tx = em.getTransaction();
-
-    userDAO = new UserDAOJPAImpl();
-    userDAO.setEm(em);
-
-    roleDAO = new RoleDAOJPAImpl();
-    roleDAO.setEm(em);
-
     user1 = new User("foo", "", "", "", "");
     user1.setPassword("a");
     user2 = new User("bar", "A", "", "", "");
