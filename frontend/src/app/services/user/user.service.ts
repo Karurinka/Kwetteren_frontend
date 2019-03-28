@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from '../../../environments/environment';
 import {User} from "../../../models/User";
+import {BaseService} from "../base.service";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,24 +12,26 @@ const httpOptions = {
 };
 
 //@Path("/users")
-@Injectable()
-export class UserServices
+@Injectable({
+  providedIn: 'root'
+})
+export class UserServices extends BaseService
 {
-  constructor(private httpClient: HttpClient)
-  {
+  constructor(private httpClient: HttpClient) {
+    super();
   }
 
   //@POST
   create(username: string, password: string, location: string, website: string, bio: string): Observable<any>
   {
-    return this.httpClient.post<any>(environment.backendUrl + '/users',
+    return this.httpClient.post<any>(`${environment.baseUrl}/users`,
       new User(username, password, location, website, bio), httpOptions);
   }
 
   //@GET
   getAllAccounts(): Observable<any>
   {
-    return this.httpClient.get<any>(environment.backendUrl + '/users',
+    return this.httpClient.get<any>(`${environment.baseUrl}/users`,
       httpOptions);
   }
 
@@ -36,7 +39,7 @@ export class UserServices
   //@Path("/{userId}")
   getAccountById(userId: number): Observable<any>
   {
-    return this.httpClient.post<any>(environment.backendUrl + '/users/{userId}',
+    return this.httpClient.post<any>(`${environment.baseUrl}/users/{userId}`,
       httpOptions);
   }
 
@@ -44,7 +47,7 @@ export class UserServices
   //@Path("/tweets/{userId}")
   getTweetsByAccountId()
   {
-    return this.httpClient.post<any>(environment.backendUrl + '/users/username/{userName}',
+    return this.httpClient.post<any>(`${environment.baseUrl}/users/username/{userName}`,
       httpOptions);
   }
 
@@ -60,7 +63,7 @@ export class UserServices
   //@Path("/search/{name}")
   search(name: string)
   {
-    return this.httpClient.get<any>(environment.backendUrl + '/users/search/{name}',
+    return this.httpClient.get<any>(`${environment.baseUrl}/users/search/{name}`,
       httpOptions);
   }
 
@@ -68,7 +71,7 @@ export class UserServices
   //@Path("/follow/{Id}")
   followToggle(id: number)
   {
-    return this.httpClient.get<any>(environment.backendUrl + 'users/follow/{Id}' +
+    return this.httpClient.get<any>(`${environment.baseUrl}/users/follow/{Id}` +
       httpOptions);
   }
 
@@ -76,7 +79,7 @@ export class UserServices
   //@Path("/followers/{Id}")
   followers(id: number)
   {
-    return this.httpClient.get<any>(environment.backendUrl + 'users/followers/{Id}' +
+    return this.httpClient.get<any>(`${environment.baseUrl}/users/followers/{Id}` +
       httpOptions);
   }
 
@@ -99,7 +102,7 @@ export class UserServices
   //@Path("/edit/password")
   editPassword(currentPass: string, newPass: string, id: number): Observable<any>
   {
-    return this.httpClient.post<any>(environment.backendUrl + '/edit/password',
+    return this.httpClient.post<any>(`${environment.baseUrl}/users/edit/password`,
       httpOptions);
   }
 

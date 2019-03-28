@@ -1,58 +1,68 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {BaseService} from '../base.service';
+import {Observable} from 'rxjs';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
 
 //@Path("/kweets")
-@Injectable()
-export class KweetService
+@Injectable({providedIn: 'root'}
+)
+export class KweetService extends BaseService
 {
 
   constructor(private httpClient: HttpClient)
   {
+    super();
   }
 
-  //@POST
-  create(content: string, id: number){
 
+  //@POST
+  // TODO: kweet JSON
+  create()
+  {
+    return this.httpClient.post(
+      `${environment.baseUrl}/kweets`, this.getDefaultHttpOptions());
   }
 
   //@GET
   //@Path("/{id}")
-  getById(id: number){
+  getById(id: number)
+  {
 
   }
 
   //@GET
   //@Path("/all")
-  getAllTweets(){
+  getAllTweets()
+  {
 
   }
 
   //@GET
-  getPersonalTweets(id: number){
+  getPersonalTweets(id: number)
+  {
 
   }
 
   //@GET
   //@Path("/search")
-  search(content: string){
+  search(content: string)
+  {
 
   }
 
   //@GET
   //@Path("/remove/{Id}")
-  delete(id: number){
+  delete(id: number)
+  {
 
   }
 
   //@POST
   //@Path("/edit")S
-  edit(id: number, content: string){
+  edit(id: number, content: string)
+  {
 
   }
 }
