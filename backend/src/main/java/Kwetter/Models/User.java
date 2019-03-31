@@ -1,5 +1,6 @@
 package Kwetter.Models;
 
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;

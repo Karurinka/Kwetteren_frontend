@@ -1,5 +1,7 @@
 package Kwetter.utility;
 
+
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -9,22 +11,26 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Singleton;
 
 @Singleton
-public class HibernateUtility {
+public class HibernateUtility
+{
 
   private SessionFactory sessionFactory;
 
   @PostConstruct
-  private void buildSessionFactory() {
+  private void buildSessionFactory()
+  {
     sessionFactory = new Configuration().configure().buildSessionFactory();
   }
 
   @Produces
-  public SessionFactory getSessionFactory() {
+  public SessionFactory getSessionFactory()
+  {
     return sessionFactory;
   }
 
   @PreDestroy
-  public void closeSessionFactory() {
+  public void closeSessionFactory()
+  {
     sessionFactory.close();
   }
 

@@ -33,8 +33,13 @@ public class UserController
   {
     Gson gson = new Gson();
     User user = gson.fromJson(userJson, User.class);
-    userService.create(user.getUsername(), user.getPassword(), user.getLocation(), user.getWebsite(), user.getBiography());
-    return "account created with username: " + user.getUsername();
+    user = userService.create(user.getUsername(), user.getPassword(), user.getLocation(), user.getWebsite(), user.getBiography());
+    if (user != null)
+    {
+      return "account created with username: " + user.getUsername();
+    } else {
+      return "user is null.";
+    }
   }
 
   @GET

@@ -1,3 +1,13 @@
-<p>
-  user-login works!
-</p>
+<div class="card border-primary mb-3 center-block" style="max-width: 60rem ">
+  <div class="card-header" style="text-align: center">Login</div>
+  <div class="card-body">
+    <form (ngSubmit)="loginSubmit()" #loginForm [ngFormOptions]="{updateOn:'submit'}">
+      <div class="form-horizontal">
+        <label for="loginUN">Email: </label>
+        <input id="loginUN" type="text" style="align-items: flex-end" class="form-control"
+               placeholder="Enter Email" required [(ngModel)]="email" name="email">
+      </div>
+    </form>
+  </div>
+</div>
+
