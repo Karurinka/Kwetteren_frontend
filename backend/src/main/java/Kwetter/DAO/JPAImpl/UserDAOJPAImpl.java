@@ -7,6 +7,7 @@ import Kwetter.Models.User;
 import Kwetter.utility.HibernateSessionFactory;
 import Kwetter.utility.JPA;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Named
-@ApplicationScoped
+@Stateless
 @JPA
 public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO
 {
@@ -101,9 +102,8 @@ public class UserDAOJPAImpl extends DAOFacade<User> implements IUserDAO
   {
     return mySessionFactory;
   }
-
-
-  public void setHibernateSessionFactory(HibernateSessionFactory em)
+  
+  public void setHibernateSessionFactory(HibernateSessionFactory mySessionFactory)
   {
     this.mySessionFactory = mySessionFactory;
   }

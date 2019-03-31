@@ -3,7 +3,6 @@ package Kwetter.DAO;
 import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
 
-import javax.persistence.EntityManager;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 

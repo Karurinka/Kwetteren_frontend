@@ -1,8 +1,5 @@
 package Kwetter.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import Kwetter.endpoints.controllers.KweetController;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -10,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.net.URI;
 import java.util.List;
-
-import org.glassfish.jersey.linking.InjectLink;
 
 @Entity
 @XmlRootElement
@@ -22,8 +17,6 @@ import org.glassfish.jersey.linking.InjectLink;
 
 public class Kweet extends KweetModel implements Serializable
 {
-  @InjectLink(resource = KweetController.class)
-  URI link;
 
   @Column(length = 140)
   private String content;
@@ -33,15 +26,12 @@ public class Kweet extends KweetModel implements Serializable
   private Date date;
 
   @ManyToOne
-  @JsonBackReference(value = "tweets")
   private User postAccount;
 
   @OneToMany
-  @JsonBackReference
   private List<User> hearted;
 
   @ManyToMany(mappedBy = "mentions")
-  @JsonBackReference
   private List<User> mentions;
 
   //constructor
@@ -103,15 +93,4 @@ public class Kweet extends KweetModel implements Serializable
   {
     this.mentions = mentions;
   }
-
-  public URI getLink()
-  {
-    return link;
-  }
-
-  public void setLink(URI link)
-  {
-    this.link = link;
-  }
-
 }

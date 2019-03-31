@@ -1,7 +1,5 @@
 package Kwetter.Models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -25,14 +23,12 @@ public class User extends KweetModel implements Serializable
   private Role role;
 
   @ManyToMany(mappedBy = "users")
-  @JsonManagedReference
   private List<Role> groups;
 
   @OneToMany(mappedBy = "postAccount")
   private List<Kweet> kweets;
 
   @OneToMany
-  @JsonManagedReference
   private List<User> following;
 
   //general models

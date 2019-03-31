@@ -6,7 +6,6 @@ import Kwetter.Models.User;
 import Kwetter.services.UserService;
 import com.google.gson.Gson;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,20 +29,12 @@ public class UserController
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response create(String userJson)
+  public String create(String userJson)
   {
-    try
-    {
-      Gson gson = new Gson();
-      User user = gson.fromJson(userJson, User.class);
-      userService.create(user.getUsername(), user.getPassword(), user.getLocation(),
-        user.getWebsite(), user.getBiography());
-      if (user == null) return Response.serverError().build();
-      return Response.created(getCreatedLink(user)).entity(user).build();
-    } catch (Exception e)
-    {
-      return Response.serverError().build();
-    }
+    Gson gson = new Gson();
+    User user = gson.fromJson(userJson, User.class);
+    userService.create(user.getUsername(), user.getPassword(), user.getLocation(), user.getWebsite(), user.getBiography());
+    return "account created with username: " + user.getUsername();
   }
 
   @GET

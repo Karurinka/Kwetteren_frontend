@@ -6,6 +6,7 @@ import Kwetter.Models.Kweet;
 import Kwetter.utility.HibernateSessionFactory;
 import Kwetter.utility.JPA;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Named
-@ApplicationScoped
+@Stateless
 @JPA
 public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
 {

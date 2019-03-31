@@ -5,21 +5,16 @@ import Kwetter.Models.Kweet;
 import Kwetter.services.KweetService;
 import com.google.gson.Gson;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.net.URI;
 import java.util.List;
 
-@Stateless
 @Path("/kweets")
 public class KweetController
 {
   @Inject
-  KweetService kweetService;
-  @Context
-  UriInfo uriInfo;
+  KweetService kweetService = new KweetService();
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
@@ -134,12 +129,5 @@ public class KweetController
       return Response.serverError().build();
     }
     return Response.ok().entity(kweet).build();
-  }
-
-
-  private URI getCreatedLink(Kweet entity)
-  {
-
-    return uriInfo.getAbsolutePathBuilder().path(entity.getId() + "").build();
   }
 }

@@ -1,3 +1,32 @@
-<p>
-  user-profile works!
-</p>
+<div *ngIf="isContentLoaded()">
+  <div class="col-xl-4">
+    <div class="card border-primary mb-4" style="max-width: 100%;">
+      <div class="card-header text-primary"><h2>Info</h2></div>
+      <div class="card-body">
+        <label id="username">{{user._username}}</label><br>
+
+        <label for="bio">Biography:</label>
+        <label id="bio">{{user._bio}}</label><br>
+
+        <label for="location">Location:</label>
+        <label id="location">{{user._location}}</label><br>
+
+        <label for="website">Website:</label>
+        <label id="website">{{user._website}}</label><br>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-8">
+    <div class="card-body">
+      <div *ngFor="let kweet of kweets" class="card-body">
+        <!-- TODO: load kweets -->
+        <div class="card bg-light border-primary" style="max-width: inherit">
+          <div class="card-header text-primary"><h3>{{kweet.postAccount.username}}</h3></div>
+          <div class="card-body">
+            <p>{{kweet.content}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

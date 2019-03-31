@@ -1,7 +1,5 @@
 package Kwetter.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -17,7 +15,7 @@ public class Role {
   @JoinTable(name = "user_role",
     joinColumns = @JoinColumn(name = "groupName", referencedColumnName = "groupName"),
     inverseJoinColumns = @JoinColumn(name = "userName", referencedColumnName = "userName"))
-  @JsonBackReference
+
   private List<User> users;
 
   public Role() {}

@@ -8,11 +8,13 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { KweetCreateComponent } from './components/kweet-create/kweet-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
+import {UserProfileComponent} from "./components/user-profile/user-profile.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    KweetCreateComponent
+    KweetCreateComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

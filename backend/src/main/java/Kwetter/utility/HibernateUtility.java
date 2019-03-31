@@ -13,7 +13,6 @@ public class HibernateUtility {
 
   private SessionFactory sessionFactory;
 
-
   @PostConstruct
   private void buildSessionFactory() {
     sessionFactory = new Configuration().configure().buildSessionFactory();
