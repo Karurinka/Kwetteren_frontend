@@ -3,6 +3,7 @@ package Kwetter.utility;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.StatelessSession;
+import org.hibernate.cfg.Configuration;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
@@ -23,6 +24,7 @@ public class HibernateSessionFactory implements ISessionFactory
 
   public Session getCurrentSession(){
     if(currentSession == null){
+      sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
       currentSession = sessionFactory.openSession();
     }
     return currentSession;
