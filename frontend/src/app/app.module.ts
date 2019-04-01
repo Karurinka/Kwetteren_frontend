@@ -9,12 +9,14 @@ import { KweetCreateComponent } from './components/kweet-create/kweet-create.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {UserProfileComponent} from "./components/user-profile/user-profile.component";
+import {UserLoginComponent} from "./components/user-login/user-login.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     KweetCreateComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
