@@ -9,11 +9,8 @@ import com.google.gson.Gson;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import java.net.URI;
 import java.util.List;
 
 @Path("/users")
@@ -23,12 +20,9 @@ public class UserController
   @Inject
   UserService userService;
 
-  @Context
-  UriInfo uriInfo;
-
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.TEXT_PLAIN)
   public String create(String userJson)
   {
     Gson gson = new Gson();
@@ -222,11 +216,5 @@ public class UserController
       return Response.serverError().build();
     }
     return Response.ok().entity(new Bool(success)).build();
-  }
-
-
-  private URI getCreatedLink(User entity)
-  {
-    return uriInfo.getAbsolutePathBuilder().path(entity.getId() + "").build();
   }
 }

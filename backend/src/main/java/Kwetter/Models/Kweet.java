@@ -1,15 +1,12 @@
 package Kwetter.Models;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.net.URI;
 import java.util.List;
 
 @Entity
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "kweetdao.getPersonalKweets", query = "select k from  Kweet k, User u  where u.Id = :id " + "and (k.postAccount.Id in (select b.Id from u.following b) or k.postAccount.Id = :id ) " + "order by k.date desc"),
     @NamedQuery(name = "kweetdao.getPostedKweets", query = "select k from  Kweet k where k.postAccount.Id = :id order by k.date desc"),

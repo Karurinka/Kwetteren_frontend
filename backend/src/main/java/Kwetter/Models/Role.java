@@ -1,12 +1,10 @@
 package Kwetter.Models;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 @Entity
-@XmlRootElement
 public class Role {
   @Id
   private String groupName;

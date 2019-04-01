@@ -2,14 +2,12 @@ package Kwetter.Models;
 
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@XmlRootElement
 @NamedQueries(value = {@NamedQuery(name = "userdao.search", query = "select u from  User u where u.username like :usernbame order by u.username desc"), @NamedQuery(name = "userdao.findByUserName", query = "SELECT u FROM User u where a.username = :username"), @NamedQuery(name = "userdao.getFollowing", query = "SELECT u FROM User u where :id in (select f.Id from u.following f)")})
 public class User extends KweetModel implements Serializable
 {
