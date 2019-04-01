@@ -8,7 +8,6 @@ import Kwetter.utility.HibernateSessionFactory;
 import Kwetter.utility.JPA;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.*;

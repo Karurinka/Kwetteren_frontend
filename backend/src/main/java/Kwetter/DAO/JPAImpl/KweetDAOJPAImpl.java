@@ -7,7 +7,6 @@ import Kwetter.utility.HibernateSessionFactory;
 import Kwetter.utility.JPA;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Query;
@@ -40,7 +39,7 @@ public class KweetDAOJPAImpl extends DAOFacade<Kweet> implements IKweetDAO
     return mySessionFactory;
   }
 
-  public void setHibernateSessionFactory(HibernateSessionFactory em)
+  public void setHibernateSessionFactory(HibernateSessionFactory mySessionFactory)
   {
     this.mySessionFactory = mySessionFactory;
   }

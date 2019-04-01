@@ -5,7 +5,6 @@ import Kwetter.Models.Role;
 import Kwetter.utility.JPA;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

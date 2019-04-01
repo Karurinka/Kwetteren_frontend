@@ -28,7 +28,6 @@ public abstract class DAOFacade<T>
 
   public void update(T entity)
   {
-    //getEntityManager().merge(entity);
     Session session = getHibernateSessionFactory().getCurrentSession();
     session.getTransaction().begin();
     session.update(entity);
@@ -37,7 +36,6 @@ public abstract class DAOFacade<T>
 
   public void delete(T entity)
   {
-    //getEntityManager().remove(getEntityManager().merge(entity));
     Session session = getHibernateSessionFactory().getCurrentSession();
     session.getTransaction().begin();
     session.delete(entity);
@@ -49,7 +47,6 @@ public abstract class DAOFacade<T>
     T entity = null;
     try
     {
-      //entity = getEntityManager().find(entityClass, id);
       entity = getHibernateSessionFactory().getCurrentSession().find(entityClass, id);
     } catch (NotFoundException e)
     {
@@ -60,7 +57,6 @@ public abstract class DAOFacade<T>
 
   public List<T> getAll()
   {
-    //return getEntityManager().createQuery("Select t from " + entityClass.getSimpleName() + " t").getResultList();
     return getHibernateSessionFactory().getCurrentSession().createQuery("Select t from " + entityClass.getSimpleName() + " t").getResultList();
   }
 }
