@@ -24,7 +24,6 @@ public class HibernateSessionFactory implements ISessionFactory
 
   public Session getCurrentSession(){
     if(currentSession == null){
-      sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
       currentSession = sessionFactory.openSession();
     }
     return currentSession;
