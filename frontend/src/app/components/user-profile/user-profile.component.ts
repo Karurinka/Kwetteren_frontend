@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserServices} from "../../services/user/user.service";
-import {User} from "../../../models/User";
+import {UserServices} from '../../services/user/user.service';
+import {User} from '../../../models/User';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,10 +16,10 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     // TODO get session id or something
-    this.userService.getAccountById(1).subscribe(data => {
-      this.user = data.user;
-      this.contentLoaded = true;
-    })
+    // this.userService.getAccountById(1).subscribe(data => {
+    //  this.user = data.user;
+    //  this.contentLoaded = true;
+    // });
   }
 
   isContentLoaded(): boolean

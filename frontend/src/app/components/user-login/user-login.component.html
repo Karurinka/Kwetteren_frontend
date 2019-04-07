@@ -1,13 +1,19 @@
-<div class="card border-primary mb-3 center-block" style="max-width: 60rem ">
-  <div class="card-header" style="text-align: center">Login</div>
-  <div class="card-body">
-    <form (ngSubmit)="loginSubmit()" #loginForm [ngFormOptions]="{updateOn:'submit'}">
-      <div class="form-horizontal">
-        <label for="loginUN">Email: </label>
-        <input id="loginUN" type="text" style="align-items: flex-end" class="form-control"
-               placeholder="Enter Email" required [(ngModel)]="email" name="email">
-      </div>
-    </form>
+<div class="container">
+  <div class="card border-primary mb-3 center-block" style="max-width: 60rem ">
+    <div class="card-header" style="text-align: center">Login</div>
+    <div class="card-body">
+      <form (ngSubmit)="loginSubmit()" #loginForm [ngFormOptions]="{updateOn:'submit'}">
+        <div class="form-horizontal">
+          <label for="username">Username: </label>
+          <input id="username" type="text" style="align-items: flex-end" class="form-control"
+                 placeholder="Enter username" required [(ngModel)]="username" name="username">
+          <label for="password">Password: </label>
+          <input id="password" type="text" style="align-items: flex-end" class="form-control"
+                 placeholder="Enter password" required [(ngModel)]="password" name="password">
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+      </form>
+    </div>
   </div>
 </div>
-
