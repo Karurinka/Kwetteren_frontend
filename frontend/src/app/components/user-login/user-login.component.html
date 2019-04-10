@@ -14,7 +14,7 @@
         <hr>
         <div class="form-horizontal">
           <div [hidden]="!isPasswordEmpty()" class="alert alert-danger"> Please fill in your password</div>
-          <div [hidden]="!isLoginIncorrect()" class="alert alert-danger"> Your email or password was incorrect</div>
+          <div [hidden]="!isLoginIncorrect()" class="alert alert-danger"> Your username or password was incorrect</div>
           <button [disabled]="loggingIn" type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
           <div [hidden]="!loggingIn" clas="alert alert-info">Logging in..</div>
         </div>
