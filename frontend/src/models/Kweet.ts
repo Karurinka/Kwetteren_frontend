@@ -1,9 +1,11 @@
 import {User} from './User';
+import {Observable} from 'rxjs';
 
 export class Kweet{
 
   kweetId: number;
-  user: User;
+  userId: number;
+  user: Observable<User>;
   content: string;
   date: Date;
 }

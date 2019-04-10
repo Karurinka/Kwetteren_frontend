@@ -24,4 +24,8 @@ export class UserServices extends BaseService {
     this.json = JSON.stringify(user);
     return this.httpClient.post<User>(`${environment.baseUrl}/rest/login/register`, this.json, this.getDefaultHttpOptions());
   }
+
+  getUserById(userId: number): Observable<User> {
+    return this.httpClient.get<User>(`${environment.baseUrl}rest/profilepage/${userId}`, this.getDefaultHttpOptions());
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/User';
 import {Kweet} from '../../../models/Kweet';
 import {KweetService} from '../../services/kweet/kweet.service';
+import {UserServices} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-kweet-homepage',
@@ -14,7 +15,7 @@ export class KweetHomepageComponent implements OnInit {
   kweets: Kweet[];
   private contentLoaded: boolean = false;
 
-  constructor(private kweetService: KweetService) { }
+  constructor(private kweetService: KweetService, private userService: UserServices) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('loggedUser'));
@@ -22,9 +23,7 @@ export class KweetHomepageComponent implements OnInit {
     this.kweetService.getTimeline(this.user.userId).subscribe(data => {
       this.kweets = data;
       for (const kweet of this.kweets) {
-        kweet.date = new Date(kweet.date)
-        // TODO: create a get userbyid
-        // kweet.user = this.kweetService.getUser();
+        kweet.date = new Date(kweet.date);
       }
       this.contentLoaded = true;
       return;
