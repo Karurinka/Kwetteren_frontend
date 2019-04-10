@@ -7,16 +7,22 @@ import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { KweetCreateComponent } from './components/kweet-create/kweet-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
-import {UserProfileComponent} from "./components/user-profile/user-profile.component";
-import {UserLoginComponent} from "./components/user-login/user-login.component";
+import { HttpClientModule } from '@angular/common/http';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { KweetHomepageComponent } from './components/kweet-homepage/kweet-homepage.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KweetCreateComponent,
     UserProfileComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    KweetHomepageComponent,
+    PageNotFoundComponent,
+    UserRegisterComponent,
   ],
   imports: [
     BrowserModule,

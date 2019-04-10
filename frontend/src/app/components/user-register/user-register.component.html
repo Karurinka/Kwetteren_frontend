@@ -1,8 +1,8 @@
 <div class="container">
   <div class="card border-primary mb-3 center-block" style="max-width: 60rem ">
-    <div class="card-header" style="text-align: center">Login</div>
+    <div class="card-header" style="text-align: center">Register</div>
     <div class="card-body">
-      <form (ngSubmit)="loginSubmit()" #loginForm [ngFormOptions]="{updateOn:'submit'}">
+      <form (ngSubmit)="registerSubmit()" #registerForm [ngFormOptions]="{updateOn:'submit'}">
         <div class="form-horizontal">
           <label for="username">Username: </label>
           <input id="username" type="text" style="align-items: flex-end" class="form-control"
@@ -13,10 +13,8 @@
         </div>
         <hr>
         <div class="form-horizontal">
-          <div [hidden]="!isPasswordEmpty()" class="alert alert-danger"> Please fill in your password</div>
-          <div [hidden]="!isLoginIncorrect()" class="alert alert-danger"> Your email or password was incorrect</div>
-          <button [disabled]="loggingIn" type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
-          <div [hidden]="!loggingIn" clas="alert alert-info">Logging in..</div>
+          <button [disabled]="registering" type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+          <div [hidden]="!registering" clas="alert alert-info">Checking availability</div>
         </div>
       </form>
     </div>

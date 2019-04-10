@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserServices} from '../../services/user/user.service';
 import {User} from '../../../models/User';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-user-profile',
@@ -12,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   private contentLoaded: boolean = false;
   protected user: User;
 
-  constructor(private userService: UserServices) { }
+  constructor(private userService: UserServices, private router: Router) { }
 
   ngOnInit() {
     // TODO get session id or something
