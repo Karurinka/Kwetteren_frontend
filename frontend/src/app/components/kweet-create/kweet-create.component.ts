@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { KweetService } from "../../services/kweet/kweet.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { KweetService } from '../../services/kweet/kweet.service';
+import { User } from '../../../models/User';
+import { Kweet } from '../../../models/Kweet';
 
 @Component({
   selector: 'app-kweet-create',
@@ -8,21 +9,18 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ['./kweet-create.component.scss']
 })
 export class KweetCreateComponent implements OnInit {
-  createKweetForm: FormGroup;
+  user: User;
+  kweetContent: string;
+  kweet: Kweet;
 
-  constructor(private kweetService: KweetService, private formBuilder: FormBuilder) { }
+  constructor(private kweetService: KweetService) { }
 
   ngOnInit() {
-    this.createKweetForm = this.formBuilder.group({
-      content: ['', Validators.required]
-    });
+    this.user = JSON.parse(localStorage.getItem('loggedUser'));
+    console.log('User: ' + this.user.userId);
   }
 
   createKweet() {
-    this.kweetService.create().subscribe()
-  }
-
-  get kweetData() {
-      return this.createKweetForm.controls;
+    this.kweetService.createKweet(this.user.userId, this.kweetContent).subscribe();
   }
 }

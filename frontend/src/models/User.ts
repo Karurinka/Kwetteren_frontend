@@ -1,12 +1,12 @@
-import {Role} from './Role';
 
-export class User
-{
-  username: string;
+export class User {
+  userId: number;
+  name: string;
+  username: string
   password: string;
   location: string;
-  website: string;
+  web: string;
   bio: string;
-  role: Role;
+  image: string;
 }
 

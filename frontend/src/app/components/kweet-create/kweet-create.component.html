@@ -4,10 +4,11 @@
       <h2 class="card-header-title">Create kweet</h2>
     </div>
     <div class="card-body">
-      <form [formGroup]="createKweetForm" (ngSubmit)="createKweet()">
+      <form (ngSubmit)="createKweet()" #createKweetForm [ngFormOptions]="{updateOn: 'submit'}">
         <div class="form-group text-style">
-          <label for="content">Content:</label>
-          <input id="content" type="text" class="form-control">
+          <label for="kweetContent">Content:</label>
+          <input id="kweetContent" type="text" [(ngModel)]="kweetContent"
+                 name="kweetContent" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Create</button>
       </form>

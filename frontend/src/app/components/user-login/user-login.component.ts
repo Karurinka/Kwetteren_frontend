@@ -45,6 +45,8 @@ export class UserLoginComponent implements OnInit {
       data => {
         if (data != null) {
           this.user = data;
+          localStorage.setItem('loggedUser', JSON.stringify(this.user));
+          localStorage.setItem('visitedUser', JSON.stringify(this.user));
           this.router.navigate(['/home']);
         }
       }, error => {

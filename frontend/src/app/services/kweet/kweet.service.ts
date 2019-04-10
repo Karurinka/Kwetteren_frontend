@@ -2,27 +2,22 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {BaseService} from '../base.service';
-import {Observable} from 'rxjs';
 
-
-//@Path("/kweets")
 @Injectable({providedIn: 'root'}
 )
-export class KweetService extends BaseService
-{
+export class KweetService extends BaseService {
 
-  constructor(private httpClient: HttpClient)
-  {
+  protected json: string;
+
+  constructor(private httpClient: HttpClient) {
     super();
   }
 
-
-  //@POST
   // TODO: kweet JSON as parameter
-  create()
-  {
-    return this.httpClient.post(
-      `${environment.baseUrl}/kweets`, this.getDefaultHttpOptions());
+  createKweet(userId: number, content: string) {
+    this.json = JSON.stringify(content);
+    return this.httpClient.put(
+      `${environment.baseUrl}/rest/kweet/${userId}`, this.json, this.getDefaultHttpOptions());
   }
 
   //@GET

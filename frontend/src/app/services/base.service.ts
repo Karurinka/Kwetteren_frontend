@@ -2,6 +2,9 @@ import { HttpHeaders } from '@angular/common/http';
 
 export class BaseService {
 
+  constructor() {
+  }
+
   /**
    * Gets the default HttpHeaders for API communication.
    */

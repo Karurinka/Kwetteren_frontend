@@ -5,6 +5,7 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 import {KweetHomepageComponent} from './components/kweet-homepage/kweet-homepage.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {UserRegisterComponent} from "./components/user-register/user-register.component";
+import {KweetCreateComponent} from "./components/kweet-create/kweet-create.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: KweetHomepageComponent
+  },
+  {
+    path: 'kweet',
+    component: KweetCreateComponent
   },
   {
     path: '**',
