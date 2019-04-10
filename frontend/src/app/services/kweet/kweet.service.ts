@@ -1,7 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {BaseService} from '../base.service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { BaseService } from '../base.service';
+import {Observable} from 'rxjs';
+import {Kweet} from '../../../models/Kweet';
 
 @Injectable({providedIn: 'root'}
 )
@@ -13,51 +15,13 @@ export class KweetService extends BaseService {
     super();
   }
 
-  // TODO: kweet JSON as parameter
   createKweet(userId: number, content: string) {
     this.json = JSON.stringify(content);
     return this.httpClient.put(
       `${environment.baseUrl}/rest/kweet/${userId}`, this.json, this.getDefaultHttpOptions());
   }
 
-  //@GET
-  //@Path("/{id}")
-  getById(id: number)
-  {
-
-  }
-
-  //@GET
-  //@Path("/all")
-  getAllTweets()
-  {
-
-  }
-
-  //@GET
-  getPersonalTweets(id: number)
-  {
-
-  }
-
-  //@GET
-  //@Path("/search")
-  search(content: string)
-  {
-
-  }
-
-  //@GET
-  //@Path("/remove/{Id}")
-  delete(id: number)
-  {
-
-  }
-
-  //@POST
-  //@Path("/edit")S
-  edit(id: number, content: string)
-  {
-
+  getTimeline(userId: number): Observable<Kweet[]> {
+    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/timeline/${userId}`, this.getDefaultHttpOptions());
   }
 }

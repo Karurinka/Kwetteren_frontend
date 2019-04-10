@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KweetService } from '../../services/kweet/kweet.service';
 import { User } from '../../../models/User';
 import { Kweet } from '../../../models/Kweet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-kweet-create',
@@ -13,14 +14,14 @@ export class KweetCreateComponent implements OnInit {
   kweetContent: string;
   kweet: Kweet;
 
-  constructor(private kweetService: KweetService) { }
+  constructor(private kweetService: KweetService, private router: Router) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('loggedUser'));
-    console.log('User: ' + this.user.userId);
   }
 
   createKweet() {
     this.kweetService.createKweet(this.user.userId, this.kweetContent).subscribe();
+    this.router.navigate(['/home']);
   }
 }

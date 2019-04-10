@@ -1,3 +1,20 @@
-<p>
-  kweet-homepage works!
-</p>
+<div class="container">
+  <div class="card border-primary mb-8" style="max-width: 100%">
+    <div class="card-header text-primary">
+      <h2 class="card-header-title">Timeline</h2>
+    </div>
+    <div  *ngIf="isContentLoaded()">
+      <div *ngFor="let kweet of kweets" class="card-body">
+        <!--template-->
+        <div class="card bg-light border-primary" style="max-width: inherit">
+          <div class="card-header text-primary"><h3></h3></div>
+          <div class="card-body">
+            <p>{{kweet.content}}</p>
+          </div>
+          <div class="card-footer">{{kweet.date.toLocaleDateString()}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
