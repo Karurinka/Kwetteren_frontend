@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../models/User';
-import {Kweet} from '../../../models/Kweet';
-import {KweetService} from '../../services/kweet/kweet.service';
-import {UserServices} from '../../services/user/user.service';
+import { User   } from '../../../models/User';
+import { Kweet } from '../../../models/Kweet';
+import { KweetService } from '../../services/kweet/kweet.service';
+import { UserServices } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-kweet-homepage',
@@ -25,6 +25,8 @@ export class KweetHomepageComponent implements OnInit {
       for (const kweet of this.kweets) {
         kweet.date = new Date(kweet.date);
       }
+
+      console.log(this.kweets);
       this.contentLoaded = true;
       return;
     });

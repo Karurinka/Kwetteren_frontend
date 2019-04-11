@@ -21,7 +21,9 @@ export class KweetCreateComponent implements OnInit {
   }
 
   createKweet() {
-    this.kweetService.createKweet(this.user.userId, this.kweetContent).subscribe();
-    this.router.navigate(['/home']);
+    this.kweetService.createKweet(this.user.userId, this.kweetContent).subscribe( data => {
+      this.router.navigate(['/home']);
+    });
+
   }
 }
