@@ -13,6 +13,8 @@ export class KweetHomepageComponent implements OnInit {
   user: User;
   visitedUser: User;
   kweets: Kweet[];
+  searchContent: string;
+  searchedKweets: Kweet[];
   private contentLoaded: boolean = false;
 
   constructor(private kweetService: KweetService, private userService: UserServices) { }
@@ -34,5 +36,12 @@ export class KweetHomepageComponent implements OnInit {
 
   isContentLoaded() {
     return this.contentLoaded;
+  }
+
+  searchKweet() {
+    this.kweetService.searchKweet(this.searchContent).subscribe( data => {
+      this.searchedKweets = data;
+      console.log(data);
+    });
   }
 }
