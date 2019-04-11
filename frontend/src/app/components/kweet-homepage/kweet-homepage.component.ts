@@ -3,6 +3,7 @@ import { User   } from '../../../models/User';
 import { Kweet } from '../../../models/Kweet';
 import { KweetService } from '../../services/kweet/kweet.service';
 import { UserServices } from '../../services/user/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-kweet-homepage',
@@ -15,7 +16,8 @@ export class KweetHomepageComponent implements OnInit {
   kweets: Kweet[];
   searchContent: string;
   searchedKweets: Kweet[];
-  private contentLoaded: boolean = false;
+  kweetUser: Observable<User> = null;
+  private contentLoaded = false;
 
   constructor(private kweetService: KweetService, private userService: UserServices) { }
 
@@ -26,9 +28,8 @@ export class KweetHomepageComponent implements OnInit {
       this.kweets = data;
       for (const kweet of this.kweets) {
         kweet.date = new Date(kweet.date);
+        kweet.user = this.userService.getUserById(kweet.userId);
       }
-
-      console.log(this.kweets);
       this.contentLoaded = true;
       return;
     });
@@ -41,7 +42,6 @@ export class KweetHomepageComponent implements OnInit {
   searchKweet() {
     this.kweetService.searchKweet(this.searchContent).subscribe( data => {
       this.searchedKweets = data;
-      console.log(data);
     });
   }
 }

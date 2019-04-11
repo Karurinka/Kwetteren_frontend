@@ -8,5 +8,6 @@ export class User {
   web: string;
   bio: string;
   image: string;
+
 }
 
