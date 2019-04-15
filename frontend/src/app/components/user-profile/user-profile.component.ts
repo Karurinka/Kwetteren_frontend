@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserServices} from '../../services/user/user.service';
-import {User} from '../../../models/User';
-import {Router} from '@angular/router'
+import { UserServices } from '../../services/user/user.service';
+import { User } from '../../../models/User';
+import { Router } from '@angular/router';
+import { KweetService } from '../../services/kweet/kweet.service';
+import {Kweet} from '../../../models/Kweet';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,22 +11,30 @@ import {Router} from '@angular/router'
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  user: User;
+  visitedUser: User;
+  kweets: Kweet[];
 
   private contentLoaded: boolean = false;
-  protected user: User;
 
-  constructor(private userService: UserServices, private router: Router) { }
+  constructor(private userService: UserServices, private kweetService: KweetService, private router: Router) { }
 
   ngOnInit() {
-    // TODO get session id or something
-    // this.userService.getAccountById(1).subscribe(data => {
-    //  this.user = data.user;
-    //  this.contentLoaded = true;
-    // });
+    this.user = JSON.parse(localStorage.getItem('loggedUser'));
+    this.visitedUser = JSON.parse(localStorage.getItem('visitedUser'));
+
+    this.kweetService.getLatestKweets(this.user.userId).subscribe(data => {
+      this.kweets = data;
+      for (const kweet of this.kweets) {
+        kweet.date = new Date(kweet.date);
+      }
+      this.contentLoaded = true;
+      console.log(this.kweets);
+      return;
+    });
   }
 
-  isContentLoaded(): boolean
-  {
+  isContentLoaded(): boolean {
     return this.contentLoaded;
   }
 }
