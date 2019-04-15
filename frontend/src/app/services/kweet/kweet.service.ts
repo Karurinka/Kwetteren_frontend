@@ -28,4 +28,8 @@ export class KweetService extends BaseService {
     this.json = JSON.stringify(searchContent);
     return this.httpClient.post<Kweet[]>(`${environment.baseUrl}/rest/kweet/search`, this.json, this.getDefaultHttpOptions());
   }
+
+  getLatestKweets(userId: number): Observable<Kweet[]> {
+    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/latest/${userId}`, this.getDefaultHttpOptions());
+  }
 }

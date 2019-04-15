@@ -16,10 +16,9 @@ export class KweetHomepageComponent implements OnInit {
   kweets: Kweet[];
   searchContent: string;
   searchedKweets: Kweet[];
-  kweetUser: Observable<User> = null;
   private contentLoaded = false;
 
-  constructor(private kweetService: KweetService, private userService: UserServices) { }
+  constructor(private kweetService: KweetService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('loggedUser'));
@@ -28,7 +27,6 @@ export class KweetHomepageComponent implements OnInit {
       this.kweets = data;
       for (const kweet of this.kweets) {
         kweet.date = new Date(kweet.date);
-        kweet.user = this.userService.getUserById(kweet.userId);
       }
       this.contentLoaded = true;
       return;
