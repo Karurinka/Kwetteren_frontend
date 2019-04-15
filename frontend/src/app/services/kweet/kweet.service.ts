@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BaseService } from '../base.service';
-import {Observable} from 'rxjs';
-import {Kweet} from '../../../models/Kweet';
+import { Observable } from 'rxjs';
+import { Kweet } from '../../../models/Kweet';
 
 @Injectable({providedIn: 'root'}
 )
@@ -30,6 +30,6 @@ export class KweetService extends BaseService {
   }
 
   getLatestKweets(userId: number): Observable<Kweet[]> {
-    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/latest/${userId}`, this.getDefaultHttpOptions());
+    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/${userId}/latestKweets`, this.getDefaultHttpOptions());
   }
 }

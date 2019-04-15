@@ -14,8 +14,7 @@ export class UserProfileComponent implements OnInit {
   user: User;
   visitedUser: User;
   kweets: Kweet[];
-
-  private contentLoaded: boolean = false;
+  private contentLoaded = false;
 
   constructor(private userService: UserServices, private kweetService: KweetService, private router: Router) { }
 
@@ -29,7 +28,6 @@ export class UserProfileComponent implements OnInit {
         kweet.date = new Date(kweet.date);
       }
       this.contentLoaded = true;
-      console.log(this.kweets);
       return;
     });
   }

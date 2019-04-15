@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User   } from '../../../models/User';
 import { Kweet } from '../../../models/Kweet';
 import { KweetService } from '../../services/kweet/kweet.service';
+import { UserServices } from '../../services/user/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-kweet-homepage',
@@ -14,9 +16,10 @@ export class KweetHomepageComponent implements OnInit {
   kweets: Kweet[];
   searchContent: string;
   searchedKweets: Kweet[];
+  kweetUser: Observable<User> = null;
   private contentLoaded = false;
 
-  constructor(private kweetService: KweetService) { }
+  constructor(private kweetService: KweetService, private userService: UserServices) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('loggedUser'));
@@ -26,6 +29,8 @@ export class KweetHomepageComponent implements OnInit {
       for (const kweet of this.kweets) {
         kweet.date = new Date(kweet.date);
       }
+      this.contentLoaded = true;
+      return;
     });
   }
 
