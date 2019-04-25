@@ -30,6 +30,6 @@ export class KweetService extends BaseService {
   }
 
   getLatestKweets(userId: number): Observable<Kweet[]> {
-    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/${userId}/latestKweets`, this.getDefaultHttpOptions());
+    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/latestKweets/${userId}`, this.getDefaultHttpOptions());
   }
 }

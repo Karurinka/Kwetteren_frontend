@@ -24,9 +24,7 @@ export class UserProfileComponent implements OnInit {
 
     this.kweetService.getLatestKweets(this.user.userId).subscribe(data => {
       this.kweets = data;
-      for (const kweet of this.kweets) {
-        kweet.date = new Date(kweet.date);
-      }
+
       this.contentLoaded = true;
       return;
     });

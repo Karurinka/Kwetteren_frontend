@@ -13,6 +13,7 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { KweetHomepageComponent } from './components/kweet-homepage/kweet-homepage.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     KweetHomepageComponent,
     PageNotFoundComponent,
     UserRegisterComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,

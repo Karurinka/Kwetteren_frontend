@@ -26,7 +26,6 @@ export class KweetHomepageComponent implements OnInit {
     this.kweetService.getTimeline(this.user.userId).subscribe(data => {
       this.kweets = data;
       for (const kweet of this.kweets) {
-        kweet.date = new Date(kweet.date);
         this.userService.getUserById(kweet.userId).subscribe( userData => {
           this.kweetUser = userData;
         });
