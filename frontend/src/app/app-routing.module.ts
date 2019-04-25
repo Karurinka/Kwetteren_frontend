@@ -11,7 +11,7 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'register',
     pathMatch: 'full'
   },
   {
@@ -24,11 +24,11 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: UserProfileComponent,
-    children: [{
-      path: 'edit',
-      component: UserEditComponent
-    }]
+    component: UserProfileComponent
+  },
+  {
+    path: 'profile/edit',
+    component: UserEditComponent
   },
   {
     path: 'home',
