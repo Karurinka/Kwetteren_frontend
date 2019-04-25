@@ -26,16 +26,16 @@ export class UserServices extends BaseService {
   }
 
   followUser(followedId: number, followerId: number): Observable<string> {
-    return this.httpClient.post<string>(`${environment.baseUrl}rest/profilepage/${followedId}/${followerId}`, this.json, this.getDefaultHttpOptions());
+    return this.httpClient.post<string>(`${environment.baseUrl}/rest/profilepage/${followedId}/${followerId}`, this.json, this.getDefaultHttpOptions());
   }
 
   getUserById(userId: number): Observable<User> {
-    return this.httpClient.get<User>(`${environment.baseUrl}rest/profilepage/${userId}`, this.getDefaultHttpOptions());
+    return this.httpClient.get<User>(`${environment.baseUrl}/rest/profilepage/${userId}`, this.getDefaultHttpOptions());
   }
 
   editProfile(userId: number, otherId: number, user: User): Observable<User> {
     this.json = JSON.stringify(user);
-    return this.httpClient.post<User>(`${environment.baseUrl}rest/profilepage/${userId}/edit/${userId}`, this.json, this.getDefaultHttpOptions());
+    return this.httpClient.post<User>(`${environment.baseUrl}/rest/profilepage/${userId}/edit/${userId}`, this.json, this.getDefaultHttpOptions());
   }
 
 
