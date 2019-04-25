@@ -19,13 +19,15 @@
           <label for="name">Name: </label>
           <input id="name" type="text" style="align-items: flex-end" class="form-control"
                  placeholder="Enter name" required [(ngModel)]="user.name" name="name">
-          <label for="web">Password: </label>
+          <label for="web">Website: </label>
           <input id="web" type="text" style="align-items: flex-end" class="form-control"
                  placeholder="Enter web" required [(ngModel)]="user.web" name="web">
         </div>
         <hr>
         <div class="form-horizontal">
           <button [disabled]="savingData" type="submit" class="btn btn-secondary btn-lg btn-block">Save</button>
+          <br>
+          <button type="button" routerLink="/profile" class="btn btn-secondary btn-lg btn-block">Back to profile</button>
           <div [hidden]="!savingData" clas="alert alert-info">Saving data...</div>
   </div>
       </form>

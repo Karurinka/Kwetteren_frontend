@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServices } from '../../services/user/user.service';
 import { User } from '../../../models/User';
-import { Router } from '@angular/router';
 import { KweetService } from '../../services/kweet/kweet.service';
-import {Kweet} from '../../../models/Kweet';
+import { Kweet } from '../../../models/Kweet';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,15 +15,18 @@ export class UserProfileComponent implements OnInit {
   kweets: Kweet[];
   private contentLoaded = false;
 
-  constructor(private userService: UserServices, private kweetService: KweetService, private router: Router) { }
+  constructor(private userService: UserServices, private kweetService: KweetService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('loggedUser'));
     this.visitedUser = JSON.parse(localStorage.getItem('visitedUser'));
 
+    this.userService.getUserById(this.user.userId).subscribe(userdData => {
+      this.user = userdData;
+    })
+
     this.kweetService.getLatestKweets(this.user.userId).subscribe(data => {
       this.kweets = data;
-
       this.contentLoaded = true;
       return;
     });

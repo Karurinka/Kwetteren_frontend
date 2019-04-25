@@ -5,17 +5,23 @@
       <div class="card border-primary mb-4" style="max-width: 100%;">
         <div class="card-header text-primary"><h2>Info</h2></div>
         <div class="card-body">
-          <label id="username">{{user.username}}</label><br>
+          <label class="text-info" id="username">{{user.username}}</label><br>
 
-          <label for="bio">Biography:</label>
-          <label id="bio">{{user.bio}}</label><br>
+          <label for="name">Name:   </label>
+          <label class="text-link" id="name">{{user.name}}</label><br>
 
-          <label for="location">Location:</label>
+          <label for="bio">Biography: </label>
+          <label class="text-link" id="bio">{{user.bio}}</label><br>
+
+          <label for="location">Location: </label>
           <label id="location">{{user.location}}</label><br>
 
-          <label for="website">Website:</label>
+          <label for="website">Website: </label>
           <label id="website">{{user.web}}</label><br>
         </div>
+      </div>
+      <div>
+        <button type="button" routerLink="../profile/edit" class="btn btn-secondary btn-lg btn-block">Edit info</button>
       </div>
     </div>
 
@@ -37,12 +43,5 @@
         </div>
       </div>
     </div>
-
-    <div class="col-xl-3">
-      <div>
-        <button type="button" routerLink="../profile/edit" class="btn btn-secondary btn-lg btn-block">Edit info</button>
-      </div>
-    </div>
-
   </div>
 </div>
