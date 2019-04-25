@@ -19,7 +19,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log(this.user);
   }
 
   isLoginIncorrect(): boolean {

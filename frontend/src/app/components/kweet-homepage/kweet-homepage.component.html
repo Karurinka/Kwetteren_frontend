@@ -25,18 +25,26 @@
           <h2 class="card-header-title">Search kweet</h2>
         </div>
         <div class="card bg-light border-primary">
+          <br>
           <input name="searchContent" type="text" style="align-items: flex-end" class="form-control"
                  placeholder="Kweet content" [(ngModel)]="searchContent" (keyup)="searchKweet()">
           <div *ngFor="let k of searchedKweets">
             <p>{{k.content}}</p>
           </div>
-          <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Zoek</button>
+          <hr>
+          <button type="submit" class="btn btn-info btn-lg btn-block">Zoek</button>
         </div>
       </div>
     </div>
     <div class="col-xl-3">
       <div>
-        <button type="button" routerLink="../kweet" class="btn btn-secondary btn-lg btn-block">Create kweet</button>
+        <button type="button" routerLink="../kweet" class="btn btn-info btn-lg btn-block">Create kweet</button>
+      </div>
+      <br>
+      <div>
+        <form (ngSubmit)="logout()" [ngFormOptions]="{updateOn:'submit'}">
+          <button type="button" routerLink="../login" class="btn btn-info btn-lg btn-block">Logout</button>
+        </form>
       </div>
     </div>
   </div>
