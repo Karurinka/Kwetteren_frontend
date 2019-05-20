@@ -5,32 +5,23 @@ pipeline {
     }
 
     stages {
-		stage('Maven clean') {
-			steps {
-				withMaven(maven : 'maven') {
-					sh 'mvm clean compile'
-				}
-			}
-		}
-		
-		stage('Maven test'){
-			steps {
-				withMaven(maven : 'maven') {
-					sh 'mvn test'
-				}
-				withMaven(maven: 'maven') {
-					sh 'mvn deploy'
-				}
-			}
-		}
+        stage('Cleanup'){
+            steps{
+                sh '''
+                docker rmi $(docker images -f 'dangling=true' -q) || true
+                docker rmi $(docker images | sed 1,2d | awk '{print $3}') || true
+                '''
+            }
+        }
+
 	
         stage('Docker Build') {
             steps {
-                sh 'docker build ./Kwetteren/frontend/. -t kevinverkuijlenfontys/overheid-frontend:test'
+                sh 'docker build ./Kwetteren/frontend/. -t michellebroens/kwetter-frontend:test'
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                   sh 'docker login -u $USERNAME -p $PASSWORD'
                 }
-                sh 'docker push kevinverkuijlenfontys/overheid-frontend:test'
+                sh 'docker push michellebroens/kwetter-frontend:test'
             }
         }
     }
