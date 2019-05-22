@@ -22,7 +22,7 @@ pipeline {
                   sh 'docker login -u $USERNAME -p $PASSWORD'
                 }
                 sh 'docker push michellebroens/kwetter_frontend:test'
-            }
+            } 
         }
     }
 }
