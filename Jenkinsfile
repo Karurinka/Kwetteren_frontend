@@ -17,11 +17,11 @@ pipeline {
 	
         stage('Docker Build') {
             steps {
-                sh 'docker build ./Kwetteren/frontend/. -t myjenkins:latest'
+                sh 'docker build ./Kwetteren/frontend/. -t michelllebroens/kwetter_frontend:test'
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                   sh 'docker login -u $USERNAME -p $PASSWORD'
                 }
-                sh 'docker push myjenkins:latest'
+                sh 'docker push michellebroens/kwetter_frontend:test'
             }
         }
     }
