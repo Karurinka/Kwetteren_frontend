@@ -17,19 +17,19 @@ export class KweetService extends BaseService {
 
   createKweet(userId: number, content: string) {
     return this.httpClient.put(
-      `${environment.baseUrl}/rest/kweet/${userId}`, content, this.getDefaultHttpOptions());
+      `${environment.baseUrl}/kweet/${userId}`, content, this.getDefaultHttpOptions());
   }
 
   getTimeline(userId: number): Observable<Kweet[]> {
-    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/timeline/${userId}`, this.getDefaultHttpOptions());
+    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/kweet/timeline/${userId}`, this.getDefaultHttpOptions());
   }
 
   searchKweet(searchContent: string): Observable<Kweet[]> {
     this.json = JSON.stringify(searchContent);
-    return this.httpClient.post<Kweet[]>(`${environment.baseUrl}/rest/kweet/search`, this.json, this.getDefaultHttpOptions());
+    return this.httpClient.post<Kweet[]>(`${environment.baseUrl}/kweet/search`, this.json, this.getDefaultHttpOptions());
   }
 
   getLatestKweets(userId: number): Observable<Kweet[]> {
-    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/rest/kweet/latestKweets/${userId}`, this.getDefaultHttpOptions());
+    return this.httpClient.get<Kweet[]>(`${environment.baseUrl}/kweet/latestKweets/${userId}`, this.getDefaultHttpOptions());
   }
 }

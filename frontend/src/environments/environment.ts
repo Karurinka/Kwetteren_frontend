@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8080/Backend_war_exploded'
+  baseUrl: 'http://localhost:8080/Better_backend_war_exploded'
 };
 
 /*
