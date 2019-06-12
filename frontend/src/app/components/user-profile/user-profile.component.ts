@@ -3,6 +3,8 @@ import { UserServices } from '../../services/user/user.service';
 import { User } from '../../../models/User';
 import { KweetService } from '../../services/kweet/kweet.service';
 import { Kweet } from '../../../models/Kweet';
+import {ProfileService} from "../../services/profile/profile.service";
+import {WebsocketService} from "../../services/websocket/websocket.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -14,8 +16,13 @@ export class UserProfileComponent implements OnInit {
   visitedUser: User;
   kweets: Kweet[];
   private contentLoaded = false;
+  followers: User[];
+  followerUser: User;
+  following: User[];
+  followingUser: User;
 
-  constructor(private userService: UserServices, private kweetService: KweetService) { }
+  constructor(private userService: UserServices, private kweetService: KweetService,
+              private profileService: ProfileService, private wsService: WebsocketService) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('loggedUser'));
@@ -29,6 +36,31 @@ export class UserProfileComponent implements OnInit {
       this.kweets = data;
       this.contentLoaded = true;
       return;
+    });
+
+    this.profileService.getFollowers(this.user.userId).subscribe( data => {
+      this.followers = (data as unknown as User[]);
+      for(const user of this.followers) {
+        this.userService.getUserById(user.userId).subscribe(userData => {
+          this.followerUser = userData;
+        });
+      }
+    });
+
+    this.profileService.getFollowing(this.user.userId).subscribe( data => {
+      this.following = (data as unknown as User[]);
+      for(const user of this.following) {
+        this.userService.getUserById(user.userId).subscribe(userData => {
+          this.followingUser = userData;
+        });
+      }
+    });
+    this.contentLoaded = true;
+  }
+
+  followUser() {
+    this.profileService.followUser(this.user.userId, this.visitedUser.userId).subscribe( data => {
+      console.log('reached');
     });
   }
 

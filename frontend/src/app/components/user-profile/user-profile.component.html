@@ -7,7 +7,7 @@
         <div class="card-body">
           <label class="text-info" id="username">{{user.username}}</label><br>
 
-          <label for="name">Name:   </label>
+          <label for="name">Name: </label>
           <label class="text-link" id="name">{{user.name}}</label><br>
 
           <label for="bio">Biography: </label>
@@ -22,6 +22,34 @@
       </div>
       <div>
         <button type="button" routerLink="../profile/edit" class="btn btn-info btn-lg btn-block">Edit info</button>
+      </div>
+
+      <br>
+
+      <div class="card border-primary mb-8" style="max-width: 100%">
+        <div class="card-header text-primary">
+          <h2 class="card-header-title">Followers</h2>
+        </div>
+        <div *ngFor="let followerUser of followers" class="card-body">
+          <!--template-->
+          <div class="card bg-light border-primary" style="max-width: inherit">
+            <div class="card-header text-primary"><h3>{{user.username}}</h3></div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card border-primary mb-8" style="max-width: 100%">
+        <div class="card-header text-primary">
+          <h2 class="card-header-title">Following</h2>
+        </div>
+        <div *ngFor="let followingUser of following" class="card-body">
+          <!--template-->
+          <div class="card bg-light border-primary" style="max-width: inherit">
+            <div class="card-header text-primary"><h3>{{user.username}}</h3></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -42,6 +70,10 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div>
+      <button type="button" routerLink="../profile" class="btn btn-info btn-lg btn-block">Follow</button>
     </div>
   </div>
 </div>
