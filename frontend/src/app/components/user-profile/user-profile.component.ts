@@ -40,6 +40,7 @@ export class UserProfileComponent implements OnInit {
 
     this.profileService.getFollowers(this.user.userId).subscribe( data => {
       this.followers = (data as unknown as User[]);
+      console.log(data);
       for (const user of this.followers) {
         this.userService.getUserById(user.userId).subscribe(userData => {
           this.followerUser = userData;
@@ -48,6 +49,7 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.profileService.getFollowing(this.user.userId).subscribe( data => {
+      console.log(data);
       this.following = (data as unknown as User[]);
       for (const user of this.following) {
         this.userService.getUserById(user.userId).subscribe(userData => {
@@ -72,7 +74,6 @@ export class UserProfileComponent implements OnInit {
       console.log(this.kweets);
       this.kweets.push(t);
       console.log(this.kweets);
-
     };
   }
 
