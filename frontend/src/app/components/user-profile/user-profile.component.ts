@@ -3,8 +3,8 @@ import { UserServices } from '../../services/user/user.service';
 import { User } from '../../../models/User';
 import { KweetService } from '../../services/kweet/kweet.service';
 import { Kweet } from '../../../models/Kweet';
-import {ProfileService} from "../../services/profile/profile.service";
-import {WebsocketService} from "../../services/websocket/websocket.service";
+import { ProfileService } from '../../services/profile/profile.service';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -30,7 +30,7 @@ export class UserProfileComponent implements OnInit {
 
     this.userService.getUserById(this.user.userId).subscribe(userdData => {
       this.user = userdData;
-    })
+    });
 
     this.kweetService.getLatestKweets(this.user.userId).subscribe(data => {
       this.kweets = data;
@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
 
     this.profileService.getFollowers(this.user.userId).subscribe( data => {
       this.followers = (data as unknown as User[]);
-      for(const user of this.followers) {
+      for (const user of this.followers) {
         this.userService.getUserById(user.userId).subscribe(userData => {
           this.followerUser = userData;
         });
@@ -49,19 +49,31 @@ export class UserProfileComponent implements OnInit {
 
     this.profileService.getFollowing(this.user.userId).subscribe( data => {
       this.following = (data as unknown as User[]);
-      for(const user of this.following) {
+      for (const user of this.following) {
         this.userService.getUserById(user.userId).subscribe(userData => {
           this.followingUser = userData;
         });
       }
     });
+    this.handleMessage();
     this.contentLoaded = true;
   }
 
   followUser() {
     this.profileService.followUser(this.user.userId, this.visitedUser.userId).subscribe( data => {
-      console.log('reached');
+
     });
+  }
+
+  handleMessage() {
+    this.wsService.websocket.onmessage = evt => {
+      console.log(`message received ${evt.data}`);
+      const t = JSON.parse(evt.data);
+      console.log(this.kweets);
+      this.kweets.push(t);
+      console.log(this.kweets);
+
+    };
   }
 
   isContentLoaded(): boolean {

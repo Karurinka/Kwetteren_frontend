@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
+import { BaseService } from '../base.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService {
-  username: string;
+export class WebsocketService extends BaseService {
+  userId: number;
   public websocket;
   connected: boolean;
 
-  private wsUri = 'ws://localhost:8080/socket/';
-
-  constructor() {
-
+  constructor(private httpClient: HttpClient) {
+    super();
   }
 
-  connect(username: string): void {
-    this.username = username;
-    console.log(`This is the url ${this.wsUri + this.username}`);    this.websocket = new WebSocket(this.wsUri + this.username);
+  connect(userId: number): void {
+    this.userId = userId;
+    console.log(`This is the url ${environment.baseUrl}/socket/${userId}`);
+    this.websocket = new WebSocket(`${environment.baseUrl}/socket/${userId}`);
     this.websocket.onopen = evt => {
       console.log('connected');
     };
