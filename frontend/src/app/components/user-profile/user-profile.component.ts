@@ -4,7 +4,7 @@ import { User } from '../../../models/User';
 import { KweetService } from '../../services/kweet/kweet.service';
 import { Kweet } from '../../../models/Kweet';
 import { ProfileService } from '../../services/profile/profile.service';
-import { WebsocketService } from '../../services/websocket/websocket.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-user-profile',

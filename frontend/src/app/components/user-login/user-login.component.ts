@@ -13,7 +13,7 @@ export class UserLoginComponent implements OnInit {
   password = null;
   error = ' ';
   user: User;
-  private loggingIn: boolean = false;
+  loggingIn: boolean = false;
 
   constructor(private userService: UserServices, private router: Router) {
   }

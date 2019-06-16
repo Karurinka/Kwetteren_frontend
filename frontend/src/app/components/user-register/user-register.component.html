@@ -16,6 +16,8 @@
           <button [disabled]="registering" type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
           <div [hidden]="!registering" class="alert alert-info">Checking availability</div>
           <br>
+          <button type="button" routerLink="../login" class="btn btn-info btn-lg btn-block">Log in</button>
+          <br>
           <div *ngIf="user" class="alert alert-info">Username {{user.username}} is already taken!</div>
         </div>
       </form>
