@@ -62,8 +62,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   followUser() {
-    this.profileService.followUser(this.user.userId, this.visitedUser.userId).subscribe( data => {
+    console.log('userid' + this.user.userId);
+    console.log('visitorid' + this.visitedUser.userId);
 
+    this.profileService.followUser(this.user.userId, this.visitedUser.userId).subscribe( data => {
+      console.log(data);
+        if (data === true) {
+          console.log('followed!');
+        }
     });
   }
 

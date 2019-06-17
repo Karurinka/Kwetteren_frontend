@@ -73,9 +73,11 @@
     </div>
 
     <div>
-      <form (ngSubmit)="followUser()" [ngFormOptions]="{updateOn: 'submit'}">
-      <button type="button"  class="btn btn-info btn-lg btn-block">Follow</button>
-      </form>
+      <div class="form-horizontal">
+        <form (ngSubmit)="followUser()" [ngFormOptions]="{updateOn:'submit'}">
+        <button type="submit" class="btn btn-info btn-lg btn-block">Follow</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
